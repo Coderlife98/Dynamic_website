@@ -4,7 +4,7 @@ import User from "../models/Auth.model.js";
 
 export const register = async (req, res) => {
   try {
-    const { email, name, password } = req.body;
+    const { name, email, password } = req.body;
 
     if (!name) {
       return res.status(400).json({
@@ -19,8 +19,6 @@ export const register = async (req, res) => {
         message: "Enter EmailId !!!",
       });
     }
-
-  
 
     if (!password) {
       return res.status(400).json({
@@ -61,7 +59,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, password, role } = req.body;
+    const { email, password } = req.body;
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -71,6 +69,7 @@ export const login = async (req, res) => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log(isMatch);
 
     if (!isMatch) {
       return res.status(400).json({
@@ -92,11 +91,10 @@ export const login = async (req, res) => {
       });
     }
 
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" },
-    );
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
 
     return res.status(200).json({
       message: "Login Successfully",
@@ -105,7 +103,7 @@ export const login = async (req, res) => {
   } catch (error) {
     return res.status(404).json({
       success: false,
-      message: "Authentication Failed !!!",
+      message: error.message,
     });
   }
 };

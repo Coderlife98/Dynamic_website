@@ -2,17 +2,39 @@ import express from "express";
 import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
 import menuRoutes from "./routes/Menu.route.js";
+import dotenv from "dotenv";
 import userRoute from "./routes/Auth.route.js";
 import { dbConfig } from "./config/dbconfig.js";
-configDotenv();
+
+
+dotenv.config();
 const app = express();
 
 app.use(express.json());
 
+
+
+
+// +++++++++++++++++++++++++++++++++ ACCESS ROUTE START +++++++++++++++++++++++++++++++++++++++ //
 app.use("/api/menu", menuRoutes);
 app.use("/api/auth", userRoute);
+// +++++++++++++++++++++++++++++++++ ACCESS ROUTE END +++++++++++++++++++++++++++++++++++++++ //
 
-app.listen(5000, () => {
-  console.log(`Server Running`);
+
+
+
+
+// +++++++++++++++++++++++++++++++++ Define PORT  Start +++++++++++++++++++++++++++++++++++++++ //
+const PORT = process.env.PORT || 3000;
+// +++++++++++++++++++++++++++++++++ Define PORT End ++++++++++++++++++++++++++++++++++++++++++ //
+
+
+
+
+
+// +++++++++++++++++++++++++++++++++ lISTEN PORT START ++++++++++++++++++++++++++++++++++++++++++ //
+app.listen(PORT, () => {
+  console.log(`Server Running on PORT ${PORT}`);
   dbConfig();
 });
+// +++++++++++++++++++++++++++++++++ lISTEN PORT END ++++++++++++++++++++++++++++++++++++++++++++ //
