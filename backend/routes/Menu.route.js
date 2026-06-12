@@ -6,7 +6,7 @@ import { createMenu, getMenu } from "../Controller/Menu.controller.js";
 
 const router = express.Router();
 
-router.get("/", getMenu);
+router.get("/get", getMenu);
 router.post("/create", createMenu);
 
 export default router;

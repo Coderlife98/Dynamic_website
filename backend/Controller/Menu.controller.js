@@ -16,6 +16,7 @@ export const createMenu = async (req, res) => {
 };
 
 export const getMenu = async (req, res) => {
+  console.log("hii");
   try {
     const menus = await Menu.find().sort({ order: 1 });
     res.json(menus);
