@@ -27,7 +27,4 @@ const testimonialSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export const Testimonial = await mongoose.model(
-  "Testimonial",
-  testimonialSchema,
-);
+export const Testimonial = mongoose.model("Testimonial", testimonialSchema);
