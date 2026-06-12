@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
+import cors from "cors";
 import menuRoutes from "./routes/Menu.route.js";
 import dotenv from "dotenv";
 import userRoute from "./routes/Auth.route.js";
@@ -17,6 +18,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 // +++++++++++++++++++++++++++++++++ ACCESS ROUTE START +++++++++++++++++++++++++++++++++++++++ //
 app.use("/api/menu", menuRoutes);
