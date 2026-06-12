@@ -9,6 +9,7 @@ import galleryRoutes from "./routes/Gallery.route.js";
 import teamRoutes from "./routes/Team.route.js";
 import blogRoute from "./routes/Blog.route.js";
 import newsRoute from "./routes/News.route.js";
+import faqRoute from "./routes/Faq.route.js";
 import { dbConfig } from "./config/dbconfig.js";
 
 dotenv.config();
@@ -24,6 +25,7 @@ app.use("/api/gallery", galleryRoutes);
 app.use("/api/team", teamRoutes);
 app.use("/api/blog", blogRoute);
 app.use("/api/news", newsRoute);
+app.use("/api/faq", faqRoute);
 // +++++++++++++++++++++++++++++++++ ACCESS ROUTE END +++++++++++++++++++++++++++++++++++++++ //
 
 // +++++++++++++++++++++++++++++++++ Define PORT  Start +++++++++++++++++++++++++++++++++++++++ //
