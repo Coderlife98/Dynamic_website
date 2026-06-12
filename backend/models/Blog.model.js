@@ -32,4 +32,4 @@ const blogSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export const Blog = await mongoose.model("Blog", blogSchema);
+export const Blog =  mongoose.model("Blog", blogSchema);

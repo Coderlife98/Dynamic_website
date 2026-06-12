@@ -7,6 +7,7 @@ import userRoute from "./routes/Auth.route.js";
 import sliderRoutes from "./routes/Slider.route.js";
 import galleryRoutes from "./routes/Gallery.route.js";
 import teamRoutes from "./routes/Team.route.js";
+import blogRoute from "./routes/Blog.route.js";
 import { dbConfig } from "./config/dbconfig.js";
 
 dotenv.config();
@@ -20,6 +21,7 @@ app.use("/api/auth", userRoute);
 app.use("/api/slider", sliderRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/team", teamRoutes);
+app.use("/api/blog", blogRoute);
 // +++++++++++++++++++++++++++++++++ ACCESS ROUTE END +++++++++++++++++++++++++++++++++++++++ //
 
 // +++++++++++++++++++++++++++++++++ Define PORT  Start +++++++++++++++++++++++++++++++++++++++ //
