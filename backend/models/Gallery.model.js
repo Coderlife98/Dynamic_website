@@ -9,7 +9,7 @@ const gallerySchema = new mongoose.Schema(
     menuId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Menu",
-      default: null,
+      required: true,
     },
     status: {
       type: Boolean,

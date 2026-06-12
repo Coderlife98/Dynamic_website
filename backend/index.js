@@ -5,6 +5,7 @@ import menuRoutes from "./routes/Menu.route.js";
 import dotenv from "dotenv";
 import userRoute from "./routes/Auth.route.js";
 import sliderRoutes from "./routes/Slider.route.js";
+import galleryRoutes from "./routes/Gallery.route.js";
 import { dbConfig } from "./config/dbconfig.js";
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/api/menu", menuRoutes);
 app.use("/api/auth", userRoute);
 app.use("/api/slider", sliderRoutes);
+app.use("/api/gallery", galleryRoutes);
 // +++++++++++++++++++++++++++++++++ ACCESS ROUTE END +++++++++++++++++++++++++++++++++++++++ //
 
 // +++++++++++++++++++++++++++++++++ Define PORT  Start +++++++++++++++++++++++++++++++++++++++ //
