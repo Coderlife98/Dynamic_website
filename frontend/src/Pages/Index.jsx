@@ -53,7 +53,6 @@ const Index = () => {
       const matchesBlog = blog.filter(
         (item) => item.menuId.toString() === menuId.toString(),
       );
-      // console.log(matchesBlog);
 
       const matchesFaq = faq.filter(
         (item) => item.menuId.toString() === menuId.toString(),
