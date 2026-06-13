@@ -39,3 +39,21 @@ export const addFaq = async (req, res) => {
     });
   }
 };
+
+export const getFaq = async (req, res) => {
+  try {
+    const getData = await Faq.find();
+    if (getData) {
+      return res.status(200).json({
+        message: "Get Faq Data",
+        success: true,
+        data: getData,
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error while accessing Faq",
+      success: false,
+    });
+  }
+};

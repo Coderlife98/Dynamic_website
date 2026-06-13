@@ -30,3 +30,26 @@ export const getMenu = async (req, res) => {
     });
   }
 };
+
+export const getMenuId = async (req, res) => {
+  try {
+    const path = `/${req.params.path}`;
+    const menu = await Menu.findOne({ path });
+    if (!menu) {
+      return res.status(404).json({
+        message: "Error while Access Path !!",
+        success: false,
+      });
+    }
+    return res.status(200).json({
+      message: "Access Menu Data",
+      success: true,
+      data: menu,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error while ACCESS MENU By Id",
+      success: false,
+    });
+  }
+};

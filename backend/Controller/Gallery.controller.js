@@ -31,3 +31,21 @@ export const addGallery = async (req, res) => {
     });
   }
 };
+
+export const getGallery = async (req, res) => {
+  try {
+    const getData = await Gallery.find();
+    if (getData) {
+      return res.status(200).json({
+        message: "Get Gallery Data",
+        success: true,
+        data: getData,
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error while accessing Gallery",
+      success: false,
+    });
+  }
+};

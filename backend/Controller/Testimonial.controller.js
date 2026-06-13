@@ -47,3 +47,21 @@ export const addTestimonial = async (req, res) => {
     });
   }
 };
+
+export const getTestimonial = async (req, res) => {
+  try {
+    const getData = await Testimonial.find();
+    if (getData) {
+      return res.status(200).json({
+        message: "Get Testimonial Data",
+        success: true,
+        data: getData,
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error while accessing Testimonial",
+      success: false,
+    });
+  }
+};

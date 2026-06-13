@@ -7,7 +7,6 @@ const Header = () => {
   const getMenu = async () => {
     try {
       const response = await axios.get(`${Base_url}menu/get`);
-      console.log(navLink);
       setNavLink(response.data.menu);
     } catch (error) {}
   };
@@ -24,11 +23,26 @@ const Header = () => {
           <ul className="text-white lg:flex gap-4">
             {navLink
               .filter((item) => item.parentId === null)
-              .map((item) => (
-                <li key={item._id}>
-                  <Link to={item.path}>{item.title}</Link>
-                </li>
-              ))}
+              .map((parent) => {
+                const children = navLink.filter(
+                  (item) => item.parentId === parent._id,
+                );
+
+                return (
+                  <li key={parent._id} className="relative group">
+                    <Link to={parent.path}>{parent.title}</Link>
+                    {children.length > 0 && (
+                      <ul className="absolute hidden group-hover:block bg-black p-2">
+                        {children.map((child) => (
+                          <li key={child._id}>
+                            <Link to={child.path}>{child.title}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                );
+              })}
           </ul>
         </div>
       </div>

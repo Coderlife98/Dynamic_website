@@ -1,5 +1,5 @@
 import express from "express";
-import { createSlider } from "../Controller/Slider.controller.js";
+import { createSlider, getSlider } from "../Controller/Slider.controller.js";
 import upload from "../middleware/uploadMiddleware.js";
 import { uploadErrorHandler } from "../middleware/uploadErrorHandler.js";
 const router = express.Router();
@@ -10,5 +10,7 @@ router.post(
   uploadErrorHandler,
   createSlider,
 );
+
+router.get("/get", getSlider);
 
 export default router;

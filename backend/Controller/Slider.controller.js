@@ -49,3 +49,21 @@ export const createSlider = async (req, res) => {
     });
   }
 };
+
+export const getSlider = async (req, res) => {
+  try {
+    const getData = await Slider.find();
+    if (getData) {
+      return res.status(200).json({
+        message: "Get Slider Data",
+        success: true,
+        data: getData,
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error while accessing slider",
+      success: false,
+    });
+  }
+};

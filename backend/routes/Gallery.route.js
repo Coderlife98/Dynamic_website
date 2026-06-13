@@ -1,6 +1,6 @@
 import express from "express";
 import upload from "../middleware/uploadMiddleware.js";
-import { addGallery } from "../Controller/Gallery.controller.js";
+import { addGallery, getGallery } from "../Controller/Gallery.controller.js";
 import { uploadErrorHandler } from "../middleware/uploadErrorHandler.js";
 const router = express.Router();
 
@@ -10,5 +10,7 @@ router.post(
   uploadErrorHandler,
   addGallery,
 );
+
+router.get('/get',getGallery)
 
 export default router;

@@ -64,3 +64,21 @@ export const addTeam = async (req, res) => {
     });
   }
 };
+
+export const getTeam = async (req, res) => {
+  try {
+    const response = await Team.find();
+    if (response) {
+      return res.status(200).json({
+        message: "Get Team Data",
+        success: true,
+        data: response,
+      });
+    }
+  } catch (error) {
+    return res.status(200).json({
+      message: "Error while access team",
+      success: false,
+    });
+  }
+};
