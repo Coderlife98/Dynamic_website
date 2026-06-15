@@ -7,18 +7,35 @@ import WebsiteLayout from "./component/WebsiteLayout";
 import Login from "./Pages/Login";
 import AdminLayout from "./component/Admin/AdminLayout";
 import Dashboard from "./Pages/Admin/Dashboard";
-
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./component/Admin/ProtectedRoute";
+import PublicRoute from "./component/Admin/PublicRoute";
 const App = () => {
   return (
     <div>
+      <Toaster position="top-right" />
       <BrowserRouter>
         <Routes>
           <Route element={<WebsiteLayout />}>
             <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
             <Route path="*" element={<Index />} />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            />
           </Route>
-          <Route path="/dashboard" element={<AdminLayout />}>
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route path="" element={<Dashboard />} />
           </Route>
         </Routes>

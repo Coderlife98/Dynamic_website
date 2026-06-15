@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { assests, Base_url } from "../constant/constant.js";
 import axios from "axios";
+import toast from "react-hot-toast";
 const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -13,14 +14,15 @@ const Login = () => {
         email,
         password,
       };
-      console.log(data);
       const loginHandler = await axios.post(`${Base_url}auth/login`, data);
-      if (loginHandler) {
-        navigate("/dashboard");
-      } else {
-        navigate("/login");
-      }
-    } catch (error) {}
+      localStorage.setItem("token", loginHandler.data.token);
+      toast.success(loginHandler.data.message);
+
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Login failed");
+      navigate("/login");
+    }
   };
   return (
     <div className="container mx-auto">
