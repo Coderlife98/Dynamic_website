@@ -1,6 +1,6 @@
 import { Company } from "../models/Company.model.js";
 
-export const updateDetails = async (req, res) => {
+export const updateCompany = async (req, res) => {
   try {
     const {
       name,
@@ -12,7 +12,10 @@ export const updateDetails = async (req, res) => {
       youtube,
       address,
       email,
+      logo,
+      favicon,
     } = req.body;
+
     const data = {
       name,
       mobile,
@@ -23,28 +26,25 @@ export const updateDetails = async (req, res) => {
       youtube,
       address,
       email,
+      logo,
+      favicon,
     };
-    // const getCompany = await Company.find();
-    // const updateRecord = await Company.updateOne(
-    //   { _id: getCompany[0]._id },
-    //   data,
-    // );
-    // if (updateRecord) {
-    //   return res.status(200).json({
-    //     message: "Updated Successfully",
-    //     success: true,
-    //     data: updateRecord,
-    //   });
-    // }
+
+    const updated = await Company.findOneAndUpdate(
+      {},
+      { $set: data },
+      { new: true },
+    );
+
+    return res.status(200).json({
+      message: "Updated Successfully",
+      success: true,
+      data: updated,
+    });
   } catch (error) {
-    return res.status(404).jsson({
+    return res.status(500).json({
       message: error.message,
       success: false,
     });
   }
-};
-
-export const updateImages = async (req, res) => {
-  try {
-  } catch (error) {}
 };

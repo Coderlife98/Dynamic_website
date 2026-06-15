@@ -1,11 +1,9 @@
 import express from "express";
 import {
-  updateDetails,
-  updateImages,
+  updateCompany,
 } from "../Controller/Company.controller.js";
 const router = express.Router();
 
-router.patch("/basic_detail", updateDetails);
-router.patch("/images", updateImages);
+router.patch("/basic_detail", updateCompany);
 
 export default router;
