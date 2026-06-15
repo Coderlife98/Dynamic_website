@@ -1,9 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../../component/Admin/BreadCrumb";
-
+import axios from "axios";
+import { Base_url } from "../../constant/constant";
+import { MdDelete, MdEditDocument } from "react-icons/md";
+import { IoNewspaper } from "react-icons/io5";
+import { Link } from "react-router-dom";
 const Menu = () => {
+  const [menuList, setMenuList] = useState([]);
+  const getMenu = async () => {
+    try {
+      const url = await axios.get(`${Base_url}menu/get`);
+      setMenuList(url.data.menu);
+    } catch (error) {}
+  };
+
+  // ++++++++++++++++ Add Title Tag start +++++++++++++++++++++++++++
   useEffect(() => {
     document.title = "Menu Bar";
+  }, []);
+  // ++++++++++++++++ Add Title Tag end ++++++++++++++++++++++++++++++
+
+  useEffect(() => {
+    getMenu();
   }, []);
   return (
     <div>
@@ -14,59 +32,47 @@ const Menu = () => {
             <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
               <tr>
                 <th scope="col" class="px-6 py-3 font-medium">
-                  Product name
+                  S.no
                 </th>
                 <th scope="col" class="px-6 py-3 font-medium">
-                  Color
+                  Menu
                 </th>
                 <th scope="col" class="px-6 py-3 font-medium">
-                  Category
+                  Path
                 </th>
                 <th scope="col" class="px-6 py-3 font-medium">
-                  Price
+                  Status
                 </th>
                 <th scope="col" class="px-6 py-3 font-medium">
-                  Stock
+                  Action
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr class="bg-neutral-primary border-b border-default">
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-heading whitespace-nowrap"
+              {menuList.map((items, index) => (
+                <tr
+                  class="bg-neutral-primary border-b border-default"
+                  key={index}
                 >
-                  Apple MacBook Pro 17"
-                </th>
-                <td class="px-6 py-4">Silver</td>
-                <td class="px-6 py-4">Laptop</td>
-                <td class="px-6 py-4">$2999</td>
-                <td class="px-6 py-4">231</td>
-              </tr>
-              <tr class="bg-neutral-primary border-b border-default">
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-heading whitespace-nowrap"
-                >
-                  Microsoft Surface Pro
-                </th>
-                <td class="px-6 py-4">White</td>
-                <td class="px-6 py-4">Laptop PC</td>
-                <td class="px-6 py-4">$1999</td>
-                <td class="px-6 py-4">423</td>
-              </tr>
-              <tr class="bg-neutral-primary">
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-heading whitespace-nowrap"
-                >
-                  Magic Mouse 2
-                </th>
-                <td class="px-6 py-4">Black</td>
-                <td class="px-6 py-4">Accessories</td>
-                <td class="px-6 py-4">$99</td>
-                <td class="px-6 py-4">121</td>
-              </tr>
+                  <td class="px-6 py-4">{index + 1}</td>
+                  <td class="px-6 py-4">{items.title}</td>
+                  <td class="px-6 py-4">{items.path}</td>
+                  <td class="px-6 py-4">
+                    {items.isActive ? "Active" : "Inactive"}
+                  </td>
+                  <td class="px-6 flex items-center py-4">
+                    <Link to={`${items._id}`}>
+                      <MdDelete className="text-xl  mx-1 text-red-500" />
+                    </Link>
+                    <Link to={`${items._id}`}>
+                      <MdEditDocument className="text-xl  mx-1 text-blue-500" />
+                    </Link>
+                    <Link to={`${items._id}`}>
+                      <IoNewspaper className="text-xl mx-1  text-yellow-500" />
+                    </Link>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
