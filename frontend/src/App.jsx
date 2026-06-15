@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./component/Admin/ProtectedRoute";
 import PublicRoute from "./component/Admin/PublicRoute";
 import Setting from "./Pages/Admin/Setting";
+import Menu from "./Pages/Admin/Menu";
 const App = () => {
   return (
     <div>
@@ -38,6 +39,7 @@ const App = () => {
             }
           >
             <Route index element={<Dashboard />} />
+            <Route path="menu" element={<Menu />} />
             <Route path="setting" element={<Setting />} />
           </Route>
         </Routes>

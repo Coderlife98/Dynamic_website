@@ -1,67 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import BreadCrumb from "../../component/Admin/BreadCrumb";
 
 const Dashboard = () => {
+  useEffect(() => {
+    document.title = "Dashboard";
+  }, []);
   return (
     <div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my profile</div>
-      <div>welcome to my sunny</div>
+      <BreadCrumb title="Dashboard" />
     </div>
   );
 };

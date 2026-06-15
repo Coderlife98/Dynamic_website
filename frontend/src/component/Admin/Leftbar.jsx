@@ -13,11 +13,14 @@ const Leftbar = () => {
       className={`bg-gradient-to-t from-[#031B43] to-[#081A3C] fixed top-14 transition-all duration-300 left-0 h-[calc(100vh-56px)] pt-5 pb-12 overflow-y-auto ${isOpen ? "w-56 px-6" : "w-0 px-0"}`}
     >
       <ul className="">
-        <Link className="text-white flex items-center">
+        <Link to="/dashboard" className="text-white flex items-center">
           <MdDashboard />
           <li className="pl-2">Dashboard</li>
         </Link>
-        <Link className="text-white my-4 flex items-center ">
+        <Link
+          to="/dashboard/menu"
+          className="text-white my-4 flex items-center "
+        >
           <BiSolidFoodMenu />
           <li className="pl-2">Menu</li>
         </Link>
