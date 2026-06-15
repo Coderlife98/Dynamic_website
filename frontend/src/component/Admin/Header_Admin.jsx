@@ -1,8 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { RiMenu3Fill } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
+import { RiMenu3Fill, RiLogoutCircleRLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { toggleSidebar } from "../../redux/sidebarSlice";
+import toast from "react-hot-toast";
 const Header_Admin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -10,30 +11,36 @@ const Header_Admin = () => {
   // ++++++++++++++++++++++++ Handle Logout section start ++++++++++++++++++++++++++++
   const handleLogout = async () => {
     localStorage.removeItem("token");
+    toast.success("Logout Successfully");
     navigate("/");
   };
   // ++++++++++++++++++++++++ Handle Logout section end ++++++++++++++++++++++++++++++++
 
   return (
-    <div className="bg-red-400 md:py-2 py-4 fixed top-0 px-6 w-full">
+    <div className="bg-gradient-to-t from-[#031B43] to-[#081A3C] border-b-1 z-20 border-slate-500 md:py-2 py-4 fixed top-0 px-6 w-full">
       <div className="flex justify-between">
         <div className="flex items-center w-full md:w-48 justify-between">
-          <div>
-            <img src="" alt="logo" />
-          </div>
+          <Link to="/dashboard">
+            <img
+              src="https://camwel.com/assets/images/camwel_logo.png"
+              className="w-20"
+              alt="logo"
+            />
+          </Link>
           <div>
             <RiMenu3Fill
               onClick={() => dispatch(toggleSidebar())}
-              className="text-xl cursor-pointer"
+              className="text-xl text-white cursor-pointer"
             />
           </div>
         </div>
         <div className="hidden md:block">
           <button
             onClick={handleLogout}
-            className="bg-black px-6 py-2 rounded-full text-white"
+            title="Logout"
+            className="h-10 w-10 flex items-center cursor-pointer justify-center rounded-full text-white"
           >
-            Logout
+            <RiLogoutCircleRLine className="text-white text-2xl" />
           </button>
         </div>
       </div>

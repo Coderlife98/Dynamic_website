@@ -13,7 +13,7 @@ const AdminLayout = () => {
       <div className="flex flex-1">
         <Leftbar />
         <main
-          className={` mt-14 pb-14 min-h-[calc(100vh-56px)] p-4 overflow-auto ${isOpen ? "ml-56" : "ml-0"}`}
+          className={` mt-14 pb-14 min-h-[calc(100vh-56px)] bg-black w-full p-4 overflow-auto ${isOpen ? "ml-56" : "ml-0"}`}
         >
           <Outlet />
         </main>

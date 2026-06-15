@@ -10,6 +10,7 @@ import Dashboard from "./Pages/Admin/Dashboard";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./component/Admin/ProtectedRoute";
 import PublicRoute from "./component/Admin/PublicRoute";
+import Setting from "./Pages/Admin/Setting";
 const App = () => {
   return (
     <div>
@@ -36,7 +37,8 @@ const App = () => {
               </ProtectedRoute>
             }
           >
-            <Route path="" element={<Dashboard />} />
+            <Route index element={<Dashboard />} />
+            <Route path="setting" element={<Setting />} />
           </Route>
         </Routes>
       </BrowserRouter>
