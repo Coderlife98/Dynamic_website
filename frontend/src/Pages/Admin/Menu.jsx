@@ -16,9 +16,32 @@ const Menu = () => {
     } catch (error) {}
   };
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (e) => {
     try {
-    } catch (error) {}
+      e.preventDefault();
+      const updateName = await axios.post(
+        `${Base_url}menu/editMenu/${selectedItem._id}`,
+        selectedItem,
+      );
+      setShowPopup(false);
+      getMenu();
+    } catch (error) {
+      console.log(error);
+      setShowPopup(false);
+    }
+  };
+
+  const handleDelete = async (data) => {
+    try {
+      const confirmDelete = window.confirm("Are You Sure");
+      if (!confirmDelete) return;
+      const response = axios.post(`${Base_url}menu/deleteMenu/${data._id}`);
+      if (response) {
+        getMenu();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // ++++++++++++++++ Add Title Tag start +++++++++++++++++++++++++++
@@ -33,24 +56,35 @@ const Menu = () => {
   return (
     <div>
       <BreadCrumb title="Menu" />
-      <div className="text-white mt-4  md:py-4   px-2">
-        <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-          <table class="w-full text-sm text-left rtl:text-right text-body">
-            <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
+      <div className="text-end">
+        <Link to="" className="text-white inline-block mt-3 bg-indigo-500 py-2 px-4">
+          Add Menu +
+        </Link>
+      </div>
+      <div className="text-white mt-2  md:py-4   px-2">
+        <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+          <table className="w-full text-sm text-left rtl:text-right text-body">
+            <thead className="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
               <tr>
-                <th scope="col" class="px-6 py-3 font-medium">
+                <th scope="col" className="px-6 py-3 font-medium">
                   S.no
                 </th>
-                <th scope="col" class="px-6 py-3 font-medium">
+                <th scope="col" className="px-6 py-3 font-medium">
                   Menu
                 </th>
-                <th scope="col" class="px-6 py-3 font-medium">
+                <th scope="col" className="px-6 py-3 font-medium">
+                  Order
+                </th>
+                <th scope="col" className="px-6 py-3 font-medium">
+                  Categories
+                </th>
+                <th scope="col" className="px-6 py-3 font-medium">
                   Path
                 </th>
-                <th scope="col" class="px-6 py-3 font-medium">
+                <th scope="col" className="px-6 py-3 font-medium">
                   Status
                 </th>
-                <th scope="col" class="px-6 py-3 font-medium">
+                <th scope="col" className="px-6 py-3 font-medium">
                   Action
                 </th>
               </tr>
@@ -58,17 +92,25 @@ const Menu = () => {
             <tbody>
               {menuList.map((items, index) => (
                 <tr
-                  class="bg-neutral-primary border-b border-default"
+                  className="bg-neutral-primary border-b border-default"
                   key={index}
                 >
-                  <td class="px-6 py-4">{index + 1}</td>
-                  <td class="px-6 py-4">{items.title}</td>
-                  <td class="px-6 py-4">{items.path}</td>
-                  <td class="px-6 py-4">
+                  <td className="px-6 py-4">{index + 1}</td>
+                  <td className="px-6 py-4">{items.title}</td>
+                  <td className="px-6 py-4">{items.order}</td>
+                  <td className="px-6 py-4">
+                    {items.parentId == null ? "Parent" : "Child"}
+                  </td>
+                  <td className="px-6 py-4">{items.path}</td>
+                  <td className="px-6 py-4">
                     {items.isActive ? "Active" : "Inactive"}
                   </td>
-                  <td class="px-6 flex items-center py-4">
-                    <Link to={`${items._id}`}>
+                  <td className="px-6 flex items-center py-4">
+                    <Link
+                      onClick={() => {
+                        handleDelete(items);
+                      }}
+                    >
                       <MdDelete className="text-xl  mx-1 text-red-500" />
                     </Link>
                     <Link
@@ -91,17 +133,42 @@ const Menu = () => {
       </div>
       {/* +++++++++++++++++++++++ Popup Condition start  ++++++++++++++ */}
       {showPopup && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white p-5 rounded-md">
-            <h2 className="text-xl">Edit Menu</h2>
-            <input
-              type="text"
-              value={selectedItem?.title || ""}
-              onChange={(e) =>
-                setSelectedItem({ ...selectedItem, title: e.target.value })
-              }
-            />
-            <button className="" onClick={handleUpdate}>
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center"
+          onClick={() => setShowPopup(false)}
+        >
+          <div
+            className="bg-white p-5 rounded-md h-56 w-96"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-xl border-b-black border-b pb-1">Edit Menu</h2>
+            <div>
+              <input
+                type="text"
+                className="border border-slate-500 mt-4 focus:outline-none w-full px-2 py-1"
+                value={selectedItem?.title || ""}
+                onChange={(e) =>
+                  setSelectedItem({ ...selectedItem, title: e.target.value })
+                }
+              />
+            </div>
+            {selectedItem?.parentId == null && (
+              <div>
+                <input
+                  type="text"
+                  className="border border-slate-500 mt-4 focus:outline-none w-full px-2 py-1"
+                  value={selectedItem?.order || ""}
+                  onChange={(e) =>
+                    setSelectedItem({ ...selectedItem, order: e.target.value })
+                  }
+                />
+              </div>
+            )}
+
+            <button
+              className="bg-indigo-500 inline-block mt-2 w-full py-2 text-white"
+              onClick={handleUpdate}
+            >
               Update
             </button>
           </div>

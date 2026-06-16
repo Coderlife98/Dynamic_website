@@ -57,7 +57,7 @@ export const getMenuId = async (req, res) => {
 
 export const editMenuById = async (req, res) => {
   try {
-    const { title } = req.body;
+    const { title, order } = req.body;
     const id = req.params.id;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -77,7 +77,7 @@ export const editMenuById = async (req, res) => {
     }
     const response = await Menu.findByIdAndUpdate(
       id,
-      { title: title },
+      { title: title, order: order },
       { new: true },
     );
     return res.status(200).json({
