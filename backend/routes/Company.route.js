@@ -1,5 +1,5 @@
 import express from "express";
-import { updateCompany } from "../Controller/Company.controller.js";
+import { getData, updateCompany } from "../Controller/Company.controller.js";
 import upload from "../middleware/uploadMiddleware.js";
 import { uploadErrorHandler } from "../middleware/uploadErrorHandler.js";
 const router = express.Router();
@@ -13,5 +13,7 @@ router.patch(
   updateCompany,
   uploadErrorHandler,
 );
+
+router.get("/get", getData);
 
 export default router;

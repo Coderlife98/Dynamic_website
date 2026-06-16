@@ -78,3 +78,21 @@ export const updateCompany = async (req, res) => {
     });
   }
 };
+
+export const getData = async (req, res) => {
+  try {
+    const response = await Company.find();
+    if (response) {
+      return res.status(200).json({
+        message: "Get Data",
+        success: true,
+        data: response,
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+      success: false,
+    });
+  }
+};
