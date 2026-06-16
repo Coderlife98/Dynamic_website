@@ -1,43 +1,73 @@
 import { Company } from "../models/Company.model.js";
+import fs from "fs";
 
 export const updateCompany = async (req, res) => {
   try {
     const {
       name,
+      email,
+      address,
       mobile,
       facebook,
       instagram,
-      linkdin,
       twitter,
       youtube,
-      address,
-      email,
-      logo,
-      favicon,
+      linkdin,
     } = req.body;
+
+    const newLogo = req.files?.logo?.[0]?.path;
+    const newFavicon = req.files?.favicon?.[0]?.path;
+
+    // Get existing company document
+    const company = await Company.findOne({});
 
     const data = {
       name,
+      email,
+      address,
       mobile,
       facebook,
       instagram,
-      linkdin,
       twitter,
       youtube,
-      address,
-      email,
-      logo,
-      favicon,
+      linkdin,
     };
 
-    const updated = await Company.findOneAndUpdate(
-      {},
-      { $set: data },
-      { new: true },
-    );
+    // Handle logo update
+    if (newLogo) {
+      if (company?.logo && fs.existsSync(company.logo)) {
+        fs.unlinkSync(company.logo);
+      }
+      data.logo = newLogo;
+    }
+
+    // Handle favicon update
+    if (newFavicon) {
+      if (company?.favicon && fs.existsSync(company.favicon)) {
+        fs.unlinkSync(company.favicon);
+      }
+      data.favicon = newFavicon;
+    }
+
+    let updated;
+
+    // If company document already exists → update it
+    if (company) {
+      updated = await Company.findOneAndUpdate(
+        {},
+        { $set: data },
+        { new: true },
+      );
+    }
+    // If no document exists → create one
+    else {
+      updated = await Company.create(data);
+    }
 
     return res.status(200).json({
-      message: "Updated Successfully",
+      message: company
+        ? "Company Updated Successfully"
+        : "Company Created Successfully",
       success: true,
       data: updated,
     });
