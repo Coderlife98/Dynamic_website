@@ -7,10 +7,17 @@ import { IoNewspaper } from "react-icons/io5";
 import { Link } from "react-router-dom";
 const Menu = () => {
   const [menuList, setMenuList] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const getMenu = async () => {
     try {
       const url = await axios.get(`${Base_url}menu/get`);
       setMenuList(url.data.menu);
+    } catch (error) {}
+  };
+
+  const handleUpdate = async () => {
+    try {
     } catch (error) {}
   };
 
@@ -64,7 +71,12 @@ const Menu = () => {
                     <Link to={`${items._id}`}>
                       <MdDelete className="text-xl  mx-1 text-red-500" />
                     </Link>
-                    <Link to={`${items._id}`}>
+                    <Link
+                      onClick={() => {
+                        setSelectedItem(items);
+                        setShowPopup(true);
+                      }}
+                    >
                       <MdEditDocument className="text-xl  mx-1 text-blue-500" />
                     </Link>
                     <Link to={`${items._id}`}>
@@ -77,6 +89,25 @@ const Menu = () => {
           </table>
         </div>
       </div>
+      {/* +++++++++++++++++++++++ Popup Condition start  ++++++++++++++ */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+          <div className="bg-white p-5 rounded-md">
+            <h2 className="text-xl">Edit Menu</h2>
+            <input
+              type="text"
+              value={selectedItem?.title || ""}
+              onChange={(e) =>
+                setSelectedItem({ ...selectedItem, title: e.target.value })
+              }
+            />
+            <button className="" onClick={handleUpdate}>
+              Update
+            </button>
+          </div>
+        </div>
+      )}
+      {/* +++++++++++++++++++++++ Popup Condition end ++++++++++++++++++ */}
     </div>
   );
 };
