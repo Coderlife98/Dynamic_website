@@ -60,13 +60,13 @@ const App = () => {
               <Route path="add_menu" element={<Add_Menu />} />
               <Route path="child_menu/:id" element={<ChildMenu />} />
               <Route path="page/:id" element={<Page />} />
-              <Route path="slider" element={<Slider />} />
-              <Route path="hero" element={<Hero />} />
-              <Route path="faq" element={<Faq />} />
-              <Route path="gallery" element={<Gallery />} />
-              <Route path="news" element={<News />} />
-              <Route path="testimonial" element={<Testimonial />} />
-              <Route path="team" element={<Team />} />
+              <Route path="slider/:id" element={<Slider />} />
+              <Route path="hero/:id" element={<Hero />} />
+              <Route path="faq/:id" element={<Faq />} />
+              <Route path="gallery/:id" element={<Gallery />} />
+              <Route path="news/:id" element={<News />} />
+              <Route path="testimonial/:id" element={<Testimonial />} />
+              <Route path="team/:id" element={<Team />} />
             </Route>
           </Routes>
         </BrowserRouter>

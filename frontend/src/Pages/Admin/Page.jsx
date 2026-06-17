@@ -28,7 +28,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Slider</h3>
             <Link
-              to="/dashboard/slider"
+              to={`/dashboard/slider/${id}`}
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Slider +
@@ -39,7 +39,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Hero</h3>
             <Link
-              to="/dashboard/hero"
+              to={`/dashboard/hero/${id}`}
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Hero +
@@ -50,7 +50,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">FAQ</h3>
             <Link
-              to="/dashboard/faq"
+              to={`/dashboard/faq/${id}`}
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add FAQ +
@@ -61,7 +61,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Gallery</h3>
             <Link
-              to="/dashboard/gallery"
+              to={`/dashboard/gallery/${id}`}
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Gallery +
@@ -72,7 +72,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">NEWS</h3>
             <Link
-              to="/dashboard/news"
+              to={`/dashboard/news/${id}`}
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add NEWS +
@@ -83,7 +83,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Team</h3>
             <Link
-              to="/dashboard/team"
+              to={`/dashboard/team/${id}`}
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Team +
@@ -94,7 +94,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Testimonial</h3>
             <Link
-              to="/dashboard/testimonial"
+              to={`/dashboard/testimonial/${id}`}
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Testimonial +

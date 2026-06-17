@@ -6,13 +6,20 @@ const sliderSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    text: {
+    heading: {
       type: String,
       require: true,
+    },
+    subtitle: {
+      type: String,
     },
     slug: {
       type: String,
       require: true,
+    },
+    categories: {
+      type: String,
+      default: "",
     },
     menuId: {
       type: mongoose.Schema.Types.ObjectId,

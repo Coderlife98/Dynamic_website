@@ -2,14 +2,14 @@ import Slider from "../models/Slider.model.js";
 
 export const createSlider = async (req, res) => {
   try {
-    const { text, slug, menuId } = req.body;
+    const { heading, subtitle, slug, menuId } = req.body;
     if (!req.file) {
       return res.status(404).json({
         message: "Select image !!!",
         success: false,
       });
     }
-    if (!text) {
+    if (!heading) {
       return res.status(404).json({
         message: "Enter Heading !!!",
         success: false,
@@ -29,8 +29,9 @@ export const createSlider = async (req, res) => {
       });
     }
     const data = {
-      text,
+      heading,
       slug,
+      subtitle,
       menuId,
       image: req.file.path,
     };
@@ -40,6 +41,7 @@ export const createSlider = async (req, res) => {
       res.status(200).json({
         success: true,
         data: response,
+        message: "Slider Added Successfully !!",
       });
     }
   } catch (error) {

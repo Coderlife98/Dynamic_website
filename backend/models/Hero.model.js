@@ -10,7 +10,7 @@ const HeroSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    subtitle: {
+    category: {
       type: String,
       required: true,
     },
@@ -27,4 +27,4 @@ const HeroSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export const Hero = await mongoose.model("Hero", HeroSchema);
+export const Hero =  mongoose.model("Hero", HeroSchema);

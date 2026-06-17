@@ -12,6 +12,7 @@ import blogRoute from "./routes/Blog.route.js";
 import newsRoute from "./routes/News.route.js";
 import faqRoute from "./routes/Faq.route.js";
 import company from "./routes/Company.route.js";
+import HeroRoute from "./routes/Hero.route.js";
 import testimonialRoute from "./routes/Testimonial.route.js";
 import { dbConfig } from "./config/dbconfig.js";
 
@@ -33,6 +34,7 @@ app.use("/api/news", newsRoute);
 app.use("/api/faq", faqRoute);
 app.use("/api/testimonial", testimonialRoute);
 app.use("/api/company", company);
+app.use("/api/hero", HeroRoute);
 // +++++++++++++++++++++++++++++++++ ACCESS ROUTE END +++++++++++++++++++++++++++++++++++++++ //
 
 // +++++++++++++++++++++++++++++++++ Define PORT  Start +++++++++++++++++++++++++++++++++++++++ //
