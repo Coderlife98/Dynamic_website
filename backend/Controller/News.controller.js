@@ -2,10 +2,16 @@ import { News } from "../models/News.model.js";
 
 export const addNews = async (req, res) => {
   try {
-    const { title, menuId } = req.body;
+    const { title, menuId, category } = req.body;
     if (!title) {
       return res.status(404).json({
-        message: "Enter Title for Blog !!",
+        message: "Enter News !!",
+        success: false,
+      });
+    }
+    if (!category) {
+      return res.status(404).json({
+        message: "Enter category  !!",
         success: false,
       });
     }
@@ -13,6 +19,7 @@ export const addNews = async (req, res) => {
     const data = {
       title,
       menuId,
+      category,
     };
 
     const response = await News.create(data);

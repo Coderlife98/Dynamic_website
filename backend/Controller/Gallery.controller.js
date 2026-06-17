@@ -2,7 +2,7 @@ import { Gallery } from "../models/Gallery.model.js";
 
 export const addGallery = async (req, res) => {
   try {
-    const { status, menuId } = req.body;
+    const { status, menuId, category } = req.body;
     if (!req.file) {
       return res.status(404).json({
         message: "Select image !!!",
@@ -10,9 +10,17 @@ export const addGallery = async (req, res) => {
       });
     }
 
+    if (!category) {
+      return res.status(404).json({
+        message: "Enter Category !!!",
+        success: false,
+      });
+    }
+
     const data = {
       image: req.file.path,
       status,
+      category,
       menuId,
     };
 

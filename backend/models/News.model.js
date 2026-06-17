@@ -11,6 +11,10 @@ const newsSchema = new mongoose.Schema(
       ref: "Menu",
       default: null,
     },
+    category: {
+      type: String,
+      required: true,
+    },
     status: {
       type: Boolean,
       default: false,

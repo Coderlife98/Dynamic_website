@@ -11,6 +11,10 @@ const gallerySchema = new mongoose.Schema(
       ref: "Menu",
       required: true,
     },
+    category: {
+      type: String,
+      required: true,
+    },
     status: {
       type: Boolean,
       default: false,
