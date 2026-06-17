@@ -7,7 +7,11 @@ const Header = () => {
   const getMenu = async () => {
     try {
       const response = await axios.get(`${Base_url}menu/get`);
-      setNavLink(response.data.menu);
+
+      const sortedMenu = response.data.menu.sort(
+        (a, b) => Number(a.order) - Number(b.order),
+      );
+      setNavLink(sortedMenu);
     } catch (error) {}
   };
   useEffect(() => {
