@@ -27,6 +27,10 @@ const News = () => {
       }
     } catch (error) {}
   };
+
+  useEffect(() => {
+    document.title = "Add NEWS || Dashboard";
+  });
   return (
     <div>
       <BreadCrumb title="News" />

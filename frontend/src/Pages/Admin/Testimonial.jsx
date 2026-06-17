@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BreadCrumb from "../../component/Admin/BreadCrumb";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -42,6 +42,10 @@ const Testimonial = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    document.title = "Add Testimonial || Dashboard";
+  });
   return (
     <div>
       <BreadCrumb title="Testimonial" />

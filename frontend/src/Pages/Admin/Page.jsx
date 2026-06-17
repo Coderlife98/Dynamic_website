@@ -20,6 +20,10 @@ const Page = () => {
   useEffect(() => {
     getName();
   }, []);
+
+  useEffect(() => {
+    document.title = `${name} || Dashboard`;
+  });
   return (
     <div>
       <BreadCrumb title={name} />

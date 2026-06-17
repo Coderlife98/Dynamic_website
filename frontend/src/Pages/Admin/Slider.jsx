@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import BreadCrumb from "../../component/Admin/BreadCrumb";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -50,6 +50,10 @@ const Slider = () => {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
   };
+
+  useEffect(() => {
+    document.title = "Add Slider || Dashboard";
+  });
   return (
     <div>
       <div>

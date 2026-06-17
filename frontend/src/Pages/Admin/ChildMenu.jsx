@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../../component/Admin/BreadCrumb";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
@@ -38,6 +38,10 @@ const ChildMenu = () => {
       //   setLoading(false);
     }
   };
+
+  useEffect(() => {
+    document.title = "Add Child Menu || Dashboard";
+  });
   return (
     <div>
       <div>

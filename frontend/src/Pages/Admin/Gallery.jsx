@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BreadCrumb from "../../component/Admin/BreadCrumb";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -35,6 +35,9 @@ const Gallery = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    document.title = "Add Gallery || Dashboard";
+  });
   return (
     <div>
       <BreadCrumb title="Gallery" />

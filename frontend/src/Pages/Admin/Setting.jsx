@@ -80,7 +80,7 @@ const Setting = () => {
   };
 
   useEffect(() => {
-    document.title = "Setting";
+    document.title = "Company Setting || Dashboard";
   }, []);
 
   useEffect(() => {

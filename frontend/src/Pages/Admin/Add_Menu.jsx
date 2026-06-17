@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../../component/Admin/BreadCrumb";
 import axios from "axios";
 import { Base_url } from "../../constant/constant";
@@ -47,6 +47,10 @@ const Add_Menu = () => {
       toast.error("");
     }
   };
+
+  useEffect(() => {
+    document.title = " Add Menu || Dashboard ";
+  }, []);
   return (
     <div>
       <div>

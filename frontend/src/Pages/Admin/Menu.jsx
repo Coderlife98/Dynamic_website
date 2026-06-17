@@ -49,13 +49,14 @@ const Menu = () => {
 
   // ++++++++++++++++ Add Title Tag start +++++++++++++++++++++++++++
   useEffect(() => {
-    document.title = "Menu Bar";
+    document.title = "Menu List || Dashboard";
   }, []);
   // ++++++++++++++++ Add Title Tag end ++++++++++++++++++++++++++++++
 
   useEffect(() => {
     getMenu();
   }, []);
+
   return (
     <div>
       <BreadCrumb title="Menu" />
@@ -133,12 +134,15 @@ const Menu = () => {
                         className="text-xl  mx-1 text-blue-500"
                       />
                     </Link>
-                    <Link to={`/dashboard/page/${items._id}`}>
-                      <IoNewspaper
-                        title="Open Page"
-                        className="text-xl mx-1  text-yellow-500"
-                      />
-                    </Link>
+                    {items && (
+                      <Link to={`/dashboard/page/${items._id}`}>
+                        <IoNewspaper
+                          title="Open Page"
+                          className="text-xl mx-1  text-yellow-500"
+                        />
+                      </Link>
+                    )}
+
                     {items.parentId == null && (
                       <Link to={`/dashboard/child_menu/${items._id}`}>
                         <RiMenuFold2Line

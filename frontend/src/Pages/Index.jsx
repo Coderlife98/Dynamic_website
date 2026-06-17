@@ -75,6 +75,8 @@ const Index = () => {
   useEffect(() => {
     getId();
   }, [location.pathname]);
+
+ 
   return (
     <div>
       <div className="">Index</div>

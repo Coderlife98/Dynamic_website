@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { assests, Base_url } from "../constant/constant.js";
 import axios from "axios";
@@ -24,6 +24,10 @@ const Login = () => {
       navigate("/login");
     }
   };
+
+  useEffect(() => {
+    document.title = "Login Now !!";
+  }, []);
   return (
     <div className="container mx-auto">
       <div className="grid my-5  md:my-18 px-2 md:px-8 md:grid-cols-2 gap-4 md:gap-8">
