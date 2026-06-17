@@ -14,6 +14,13 @@ const testimonialSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    designation: {
+      type: String,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
     menuId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Menu",

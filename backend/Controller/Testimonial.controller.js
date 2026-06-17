@@ -3,7 +3,7 @@ import { Testimonial } from "../models/Testimonial.model.js";
 
 export const addTestimonial = async (req, res) => {
   try {
-    const { name, description, status, menuId } = req.body;
+    const { name, description, status, menuId, category } = req.body;
     if (!req.file) {
       return res.status(404).json({
         message: "Select Image !!",
@@ -24,11 +24,19 @@ export const addTestimonial = async (req, res) => {
         success: false,
       });
     }
+
+    if (!category) {
+      return res.status(404).json({
+        message: "Enter Category !!",
+        success: false,
+      });
+    }
     const data = {
       image: req.file.path,
       name,
       description,
       menuId,
+      category,
       status,
     };
 
