@@ -98,10 +98,11 @@ const Setting = () => {
         <form onSubmit={handleUpdate} className="md:px-8">
           <div className="grid md:grid-cols-2 gap-4 md:gap-x-6 md:gap-y-4 lg:grid-cols-3">
             <div>
-              <label htmlFor="">Company Name</label> <br />
+              <label htmlFor="name">Company Name</label> <br />
               <input
                 type="text"
                 value={name}
+                id="name"
                 onChange={(e) => setName(e.target.value)}
                 name="name"
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -109,10 +110,11 @@ const Setting = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Mobile No</label> <br />
+              <label htmlFor="mobile">Mobile No</label> <br />
               <input
                 type="text"
                 value={mobile}
+                id="mobile"
                 onChange={(e) => setMobile(e.target.value)}
                 name="mobile"
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -120,9 +122,10 @@ const Setting = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Email</label> <br />
+              <label htmlFor="email">Email</label> <br />
               <input
                 type="text"
+                id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 name="email"
@@ -131,10 +134,11 @@ const Setting = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Address</label> <br />
+              <label htmlFor="address">Address</label> <br />
               <input
                 type="text"
                 value={address}
+                id="address"
                 onChange={(e) => setAddress(e.target.value)}
                 name="address"
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -142,72 +146,78 @@ const Setting = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Facebook Id</label> <br />
+              <label htmlFor="facebook">Facebook Id</label> <br />
               <input
                 type="text"
                 name="facebook"
+                id="facebook"
                 value={facebook}
                 onChange={(e) => setFacebook(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Facebook Id"
+                placeholder="Enter Facebook Id"
               />
             </div>
             <div>
-              <label htmlFor="">Twitter Id</label> <br />
+              <label htmlFor="twitter">Twitter Id</label> <br />
               <input
                 type="text"
                 name="twitter"
+                id="twitter"
                 onChange={(e) => setTwitter(e.target.value)}
                 value={twitter}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Twitter Id"
+                placeholder="Enter Twitter Id"
               />
             </div>
             <div>
-              <label htmlFor="">Instagram Id</label> <br />
+              <label htmlFor="instagram">Instagram Id</label> <br />
               <input
                 type="text"
                 name="instagram"
+                id="instagram"
                 value={instagram}
                 onChange={(e) => setInstagram(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Instagram Id"
+                placeholder="Enter Instagram Id"
               />
             </div>
             <div>
-              <label htmlFor="">Linkedin Id</label> <br />
+              <label htmlFor="linkdin">Linkedin Id</label> <br />
               <input
                 type="text"
                 value={linkdin}
                 name="linkdin"
+                id="linkdin"
                 onChange={(e) => setLinkdin(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Linkedin Id"
+                placeholder="Enter Linkedin Id"
               />
             </div>
             <div>
-              <label htmlFor="">Youtube Link</label> <br />
+              <label htmlFor="youtube">Youtube Link</label> <br />
               <input
                 type="text"
                 name="youtube"
                 value={youtube}
+                id="youtube"
                 onChange={(e) => setYoutube(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Youtube Link"
+                placeholder="Enter Youtube Link"
               />
             </div>
             <div>
-              <label htmlFor="">Logo</label> <br />
+              <label htmlFor="logo">Logo</label> <br />
               <input
                 type="file"
                 name="logo"
+                id="logo"
+                accept="image/png, image/jpeg, image/jpg, image/webp"
                 onChange={(e) => {
                   const file = e.target.files[0];
                   setLogo(file);
                   setLogoPreview(URL.createObjectURL(file));
                 }}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Company Name"
               />
               <div>
                 <a href={logoPreview} target="_blank">
@@ -216,10 +226,12 @@ const Setting = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="">Favicon</label> <br />
+              <label htmlFor="favicon">Favicon</label> <br />
               <input
                 type="file"
                 name="favicon"
+                id="favicon"
+                accept="image/png, image/jpeg, image/jpg, image/webp"
                 onChange={(e) => {
                   const file = e.target.files[0];
                   setFavicon(file);

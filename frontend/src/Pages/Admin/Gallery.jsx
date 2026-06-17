@@ -49,10 +49,11 @@ const Gallery = () => {
             <input type="hidden" name="menuId" />
 
             <div>
-              <label htmlFor="">Image</label> <br />
+              <label htmlFor="image">Image</label> <br />
               <input
                 type="file"
                 name="image"
+                accept="image/png, image/jpg, image/jpeg, image/webp"
                 required
                 onChange={(e) => setImage(e.target.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -60,7 +61,7 @@ const Gallery = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Category</label> <br />
+              <label htmlFor="category">Category</label> <br />
               <input
                 type="text"
                 name="category"
@@ -70,7 +71,7 @@ const Gallery = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Status</label> <br />
+              <label htmlFor="isActive">Status</label> <br />
               <select
                 name="isActive"
                 className="w-full border border-slate-600 p-2"

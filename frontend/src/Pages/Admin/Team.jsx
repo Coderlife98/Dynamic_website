@@ -63,89 +63,97 @@ const Team = () => {
             <input type="hidden" name="menuId" />
 
             <div>
-              <label htmlFor="">Image</label> <br />
+              <label htmlFor="image">Image</label> <br />
               <input
                 type="file"
                 name="image"
+                id="image"
+                accept="image/png, image/jpeg, image/jpg, image/webp"
                 required
                 onChange={(e) => setImage(e.target.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Title"
               />
             </div>
             <div>
-              <label htmlFor="">Name</label> <br />
+              <label htmlFor="name">Name</label> <br />
               <input
                 type="text"
+                id="name"
                 name="name"
                 required
                 onChange={(e) => setName(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Title"
+                placeholder="Enter Name"
               />
             </div>
             <div>
-              <label htmlFor="">Designation</label> <br />
+              <label htmlFor="designation">Designation</label> <br />
               <input
                 type="text"
                 name="designation"
+                id="designation"
                 onChange={(e) => setDesignation(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Description"
+                placeholder="Enter Designation"
               />
             </div>
             <div>
-              <label htmlFor="">Facebook</label> <br />
+              <label htmlFor="facebook">Facebook</label> <br />
               <input
                 type="text"
                 name="facebook"
+                id="facebook"
                 onChange={(e) => setFacebook(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Description"
+                placeholder="Enter Facebook Id"
               />
             </div>
             <div>
-              <label htmlFor="">Instagram</label> <br />
+              <label htmlFor="instagram">Instagram</label> <br />
               <input
                 type="text"
                 name="instagram"
+                id="instagram"
                 onChange={(e) => setInstagram(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Description"
+                placeholder="Enter Instagram Id"
               />
             </div>
             <div>
-              <label htmlFor="">Twitter</label> <br />
+              <label htmlFor="twitter">Twitter</label> <br />
               <input
                 type="text"
                 name="twitter"
+                id="twitter"
                 onChange={(e) => setTwitter(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Description"
+                placeholder="Enter Twitter Id"
               />
             </div>
             <div>
-              <label htmlFor="">Youtube</label> <br />
+              <label htmlFor="youtube">Youtube</label> <br />
               <input
                 type="text"
                 name="youtube"
+                id="youtube"
                 onChange={(e) => setYoutube(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Description"
+                placeholder="Enter Youtube Link"
               />
             </div>
             <div>
-              <label htmlFor="">Linkdin</label> <br />
+              <label htmlFor="linkdin">Linkdin</label> <br />
               <input
                 type="text"
                 name="linkdin"
+                id="linkdin"
                 onChange={(e) => setLinkdin(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Description"
+                placeholder="Enter Linkdin Id"
               />
             </div>
             <div>
-              <label htmlFor="">Status</label> <br />
+              <label htmlFor="isActive">Status</label> <br />
               <select
                 name="isActive"
                 className="w-full border border-slate-600 p-2"

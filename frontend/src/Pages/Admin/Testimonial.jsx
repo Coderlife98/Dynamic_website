@@ -56,54 +56,59 @@ const Testimonial = () => {
             <input type="hidden" name="menuId" />
 
             <div>
-              <label htmlFor="">Image</label> <br />
+              <label htmlFor="image">Image</label> <br />
               <input
                 type="file"
                 name="image"
+                id="image"
+                accept="image/png, image/jpeg, image/jpg, image/webp"
                 required
                 onChange={(e) => setImage(e.target.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Title"
               />
             </div>
             <div>
-              <label htmlFor="">Name</label> <br />
+              <label htmlFor="name">Name</label> <br />
               <input
                 type="text"
                 name="name"
+                id="name"
                 required
                 onChange={(e) => setName(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Title"
+                placeholder="Enter Name"
               />
             </div>
             <div>
-              <label htmlFor="">Category</label> <br />
+              <label htmlFor="category">Category</label> <br />
               <input
                 type="text"
                 name="category"
+                id="category"
                 onChange={(e) => setCategory(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Description"
+                placeholder="Enter Category"
               />
             </div>
 
             <div>
-              <label htmlFor="">Designation</label> <br />
+              <label htmlFor="designation">Designation</label> <br />
               <input
                 type="text"
                 name="designation"
+                id="designation"
                 onChange={(e) => setDesignation(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Description"
+                placeholder="Enter Designation"
               />
             </div>
 
             <div>
-              <label htmlFor="">Description</label> <br />
+              <label htmlFor="description">Description</label> <br />
               <input
                 type="text"
                 name="description"
+                id="description"
                 onChange={(e) => setDescription(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
                 placeholder="Enter Description"
@@ -111,7 +116,7 @@ const Testimonial = () => {
             </div>
 
             <div>
-              <label htmlFor="">Status</label> <br />
+              <label htmlFor="isActive">Status</label> <br />
               <select
                 name="isActive"
                 className="w-full border border-slate-600 p-2"

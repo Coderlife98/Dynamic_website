@@ -42,10 +42,11 @@ const News = () => {
           className="grid gap-5 md:grid-cols-2 md:px-8"
         >
           <div>
-            <label htmlFor="">News</label> <br />
+            <label htmlFor="title">News</label> <br />
             <input
               type="text"
               name="title"
+              id="title"
               required
               onChange={(e) => setTitle(e.target.value)}
               className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -53,10 +54,11 @@ const News = () => {
             />
           </div>
           <div>
-            <label htmlFor="">Category</label> <br />
+            <label htmlFor="category">Category</label> <br />
             <input
               type="text"
               name="category"
+              id="category"
               required
               onChange={(e) => setCategory(e.target.value)}
               className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -65,7 +67,7 @@ const News = () => {
           </div>
           <input type="hidden" name="menuId" />
           <div>
-            <label htmlFor="">Status</label> <br />
+            <label htmlFor="isActive">Status</label> <br />
             <select
               name="isActive"
               className="w-full border border-slate-600 p-2"

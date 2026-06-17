@@ -40,21 +40,23 @@ const Login = () => {
             </div>
             <div className="">
               <div className="flex flex-col">
-                <label htmlFor="">EmailId</label>
+                <label htmlFor="email">EmailId</label>
                 <input
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   name="email"
+                  id="email"
                   className="border  py-1 px-2 mt-2 border-slate-400 active:border-green-400 focus:outline-none"
                   placeholder="Enter EmailId"
                 />
               </div>
               <div className="flex my-2 flex-col">
-                <label htmlFor="">Password</label>
+                <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
                   name="password"
+                  id="password"
                   className="border py-1 px-2 mt-2 border-slate-400 active:border-green-400 focus:outline-none"
                   placeholder="Enter Password"
                 />

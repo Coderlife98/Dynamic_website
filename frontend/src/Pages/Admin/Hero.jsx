@@ -41,36 +41,39 @@ const Hero = () => {
         <form ref={formRef} onSubmit={handleHero} className="md:px-8">
           <div className="grid md:grid-cols-2 gap-4 md:gap-x-6 md:gap-y-4 ">
             <div>
-              <label htmlFor="">Image</label> <br />
+              <label htmlFor="image">Image</label> <br />
               <input
                 type="file"
                 name="image"
+                id="image"
+                accept="image/png, image/jpeg, image/jpg, image/webp"
                 required
                 onChange={(e) => setImage(e.target?.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Name"
               />
               <input type="hidden" name="parentId" />
             </div>
             <div>
-              <label htmlFor="">Title</label> <br />
+              <label htmlFor="title">Title</label> <br />
               <input
                 type="text"
                 name="title"
+                id="title"
                 required
                 onChange={(e) => setTitle(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Slider Heading"
+                placeholder="Enter Title"
               />
             </div>
             <div>
-              <label htmlFor="">Category</label> <br />
+              <label htmlFor="category">Category</label> <br />
               <input
                 type="text"
                 name="category"
+                id="category"
                 onChange={(e) => setCategory(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Category"
+                placeholder="Enter Category"
               />
             </div>
           </div>
