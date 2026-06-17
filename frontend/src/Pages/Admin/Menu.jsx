@@ -133,7 +133,7 @@ const Menu = () => {
                         className="text-xl  mx-1 text-blue-500"
                       />
                     </Link>
-                    <Link to={`${items._id}`}>
+                    <Link to={`/dashboard/page/${items._id}`}>
                       <IoNewspaper
                         title="Open Page"
                         className="text-xl mx-1  text-yellow-500"

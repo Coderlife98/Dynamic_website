@@ -10,6 +10,13 @@ import ProtectedRoute from "./component/Admin/ProtectedRoute";
 import PublicRoute from "./component/Admin/PublicRoute";
 import Add_Menu from "./Pages/Admin/Add_Menu";
 import ChildMenu from "./Pages/Admin/ChildMenu";
+import Page from "./Pages/Admin/Page";
+import Slider from "./Pages/Admin/Slider";
+import Hero from "./Pages/Admin/Hero";
+import Faq from "./Pages/Admin/Faq";
+import News from "./Pages/Admin/News";
+import Testimonial from "./Pages/Admin/Testimonial";
+import Team from "./Pages/Admin/Team";
 const Login = lazy(() => import("./Pages/Login"));
 const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
 const Setting = lazy(() => import("./Pages/Admin/Setting"));
@@ -51,6 +58,13 @@ const App = () => {
               <Route path="setting" element={<Setting />} />
               <Route path="add_menu" element={<Add_Menu />} />
               <Route path="child_menu/:id" element={<ChildMenu />} />
+              <Route path="page/:id" element={<Page />} />
+              <Route path="slider" element={<Slider />} />
+              <Route path="hero" element={<Hero />} />
+              <Route path="faq" element={<Faq />} />
+              <Route path="news" element={<News />} />
+              <Route path="testimonial" element={<Testimonial />} />
+              <Route path="team" element={<Team />} />
             </Route>
           </Routes>
         </BrowserRouter>
