@@ -127,3 +127,33 @@ export const deleteById = async (req, res) => {
     });
   }
 };
+
+export const getMenuById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({
+        message: "Invalid Id",
+        success: false,
+      });
+    }
+    const menuData = await Menu.findById(id);
+    if (menuData) {
+      return res.status(200).json({
+        message: "Access Menu Data",
+        success: true,
+        data: menuData,
+      });
+    } else {
+      return res.status(404).json({
+        message: "Data Not Exist On DB",
+        data: menuData,
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error while ACCESS MENU By Id",
+      success: false,
+    });
+  }
+};

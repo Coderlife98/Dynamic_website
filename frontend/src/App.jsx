@@ -8,6 +8,8 @@ import WebsiteLayout from "./component/WebsiteLayout";
 import AdminLayout from "./component/Admin/AdminLayout";
 import ProtectedRoute from "./component/Admin/ProtectedRoute";
 import PublicRoute from "./component/Admin/PublicRoute";
+import Add_Menu from "./Pages/Admin/Add_Menu";
+import ChildMenu from "./Pages/Admin/ChildMenu";
 const Login = lazy(() => import("./Pages/Login"));
 const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
 const Setting = lazy(() => import("./Pages/Admin/Setting"));
@@ -47,6 +49,8 @@ const App = () => {
               <Route index element={<Dashboard />} />
               <Route path="menu" element={<Menu />} />
               <Route path="setting" element={<Setting />} />
+              <Route path="add_menu" element={<Add_Menu />} />
+              <Route path="child_menu/:id" element={<ChildMenu />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -7,6 +7,7 @@ import {
   deleteById,
   editMenuById,
   getMenu,
+  getMenuById,
   getMenuId,
 } from "../Controller/Menu.controller.js";
 
@@ -17,4 +18,5 @@ router.post("/create", createMenu);
 router.post("/:path", getMenuId);
 router.post("/editMenu/:id", editMenuById);
 router.post("/deleteMenu/:id", deleteById);
+router.post("/getMenyById/:id", getMenuById);
 export default router;

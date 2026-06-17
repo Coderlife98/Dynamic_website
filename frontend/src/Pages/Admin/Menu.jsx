@@ -4,6 +4,7 @@ import axios from "axios";
 import { Base_url } from "../../constant/constant";
 import { MdDelete, MdEditDocument } from "react-icons/md";
 import { IoNewspaper } from "react-icons/io5";
+import { RiMenuFold2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 const Menu = () => {
   const [menuList, setMenuList] = useState([]);
@@ -35,7 +36,9 @@ const Menu = () => {
     try {
       const confirmDelete = window.confirm("Are You Sure");
       if (!confirmDelete) return;
-      const response = axios.post(`${Base_url}menu/deleteMenu/${data._id}`);
+      const response = await axios.post(
+        `${Base_url}menu/deleteMenu/${data._id}`,
+      );
       if (response) {
         getMenu();
       }
@@ -57,13 +60,16 @@ const Menu = () => {
     <div>
       <BreadCrumb title="Menu" />
       <div className="text-end">
-        <Link to="" className="text-white inline-block mt-3 bg-indigo-500 py-2 px-4">
+        <Link
+          to="/dashboard/add_menu"
+          className="text-white inline-block mt-3 bg-indigo-500 py-2 px-4"
+        >
           Add Menu +
         </Link>
       </div>
       <div className="text-white mt-2  md:py-4   px-2">
         <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-          <table className="w-full text-sm text-left rtl:text-right text-body">
+          <table className="w-full text-nowrap text-sm text-left rtl:text-right text-body">
             <thead className="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
               <tr>
                 <th scope="col" className="px-6 py-3 font-medium">
@@ -111,7 +117,10 @@ const Menu = () => {
                         handleDelete(items);
                       }}
                     >
-                      <MdDelete className="text-xl  mx-1 text-red-500" />
+                      <MdDelete
+                        title="Delete Menu"
+                        className="text-xl  mx-1 text-red-500"
+                      />
                     </Link>
                     <Link
                       onClick={() => {
@@ -119,11 +128,25 @@ const Menu = () => {
                         setShowPopup(true);
                       }}
                     >
-                      <MdEditDocument className="text-xl  mx-1 text-blue-500" />
+                      <MdEditDocument
+                        title="Edit Menu"
+                        className="text-xl  mx-1 text-blue-500"
+                      />
                     </Link>
                     <Link to={`${items._id}`}>
-                      <IoNewspaper className="text-xl mx-1  text-yellow-500" />
+                      <IoNewspaper
+                        title="Open Page"
+                        className="text-xl mx-1  text-yellow-500"
+                      />
                     </Link>
+                    {items.parentId == null && (
+                      <Link to={`/dashboard/child_menu/${items._id}`}>
+                        <RiMenuFold2Line
+                          title="child Menu"
+                          className="text-xl mx-1  text-yellow-500"
+                        />
+                      </Link>
+                    )}
                   </td>
                 </tr>
               ))}
