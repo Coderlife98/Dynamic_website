@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import BreadCrumb from "../../component/Admin/BreadCrumb";
 
 const Team = () => {
   return (
-    <div>Team</div>
-  )
-}
+    <div>
+      <BreadCrumb title="Team" />
+    </div>
+  );
+};
 
-export default Team
+export default Team;

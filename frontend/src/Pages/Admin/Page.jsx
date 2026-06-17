@@ -12,11 +12,9 @@ const Page = () => {
     event.preventDefault();
     try {
       const isExistOnDb = await axios.post(`${Base_url}menu/getMenyById/${id}`);
-      console.log(isExistOnDb);
       isExistOnDb ? setName(isExistOnDb.data.data.title) : "";
     } catch (error) {
       console.log(error);
-      //   setLoading(false);
     }
   };
   useEffect(() => {
@@ -30,7 +28,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Slider</h3>
             <Link
-              to=""
+              to="/dashboard/slider"
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Slider +
@@ -41,7 +39,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Hero</h3>
             <Link
-              to=""
+              to="/dashboard/hero"
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Hero +
@@ -52,7 +50,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">FAQ</h3>
             <Link
-              to=""
+              to="/dashboard/faq"
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add FAQ +
@@ -63,7 +61,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Gallery</h3>
             <Link
-              to=""
+              to="/dashboard/gallery"
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Gallery +
@@ -74,7 +72,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">NEWS</h3>
             <Link
-              to=""
+              to="/dashboard/news"
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add NEWS +
@@ -85,7 +83,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Team</h3>
             <Link
-              to=""
+              to="/dashboard/team"
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Team +
@@ -96,7 +94,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Testimonial</h3>
             <Link
-              to=""
+              to="/dashboard/testimonial"
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Testimonial +

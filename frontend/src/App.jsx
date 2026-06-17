@@ -17,6 +17,7 @@ import Faq from "./Pages/Admin/Faq";
 import News from "./Pages/Admin/News";
 import Testimonial from "./Pages/Admin/Testimonial";
 import Team from "./Pages/Admin/Team";
+import Gallery from "./Pages/Admin/Gallery";
 const Login = lazy(() => import("./Pages/Login"));
 const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
 const Setting = lazy(() => import("./Pages/Admin/Setting"));
@@ -62,6 +63,7 @@ const App = () => {
               <Route path="slider" element={<Slider />} />
               <Route path="hero" element={<Hero />} />
               <Route path="faq" element={<Faq />} />
+              <Route path="gallery" element={<Gallery />} />
               <Route path="news" element={<News />} />
               <Route path="testimonial" element={<Testimonial />} />
               <Route path="team" element={<Team />} />

@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from "react";
+import BreadCrumb from "../../component/Admin/BreadCrumb";
 
 const Faq = () => {
   return (
-    <div>Faq</div>
-  )
-}
+    <div>
+      <div>
+        <BreadCrumb title="FAQ" />
+      </div>
+    </div>
+  );
+};
 
-export default Faq
+export default Faq;
