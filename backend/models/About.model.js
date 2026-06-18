@@ -13,7 +13,7 @@ const aboutSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    subHeading: {
+    subheading: {
       type: String,
     },
     description: {
