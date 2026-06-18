@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Index from "./Pages/Index";
@@ -18,11 +18,40 @@ import News from "./Pages/Admin/News";
 import Testimonial from "./Pages/Admin/Testimonial";
 import Team from "./Pages/Admin/Team";
 import Gallery from "./Pages/Admin/Gallery";
+import axios from "axios";
+import { Base_url } from "./constant/constant";
 const Login = lazy(() => import("./Pages/Login"));
 const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
 const Setting = lazy(() => import("./Pages/Admin/Setting"));
 const Menu = lazy(() => import("./Pages/Admin/Menu"));
 const App = () => {
+  const [favicon, setFavicon] = useState();
+
+  const getFavicon = async () => {
+    try {
+      const get = await axios.get(`${Base_url}company/getLogo`);
+      setFavicon(get.data.data.favicon);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getFavicon();
+  }, []);
+
+  useEffect(() => {
+    if (favicon) {
+      const faviconElement = document.getElementById("favicon");
+      if (faviconElement) {
+        const path =
+          Base_url.replace("/api/", "/") + favicon.replace("/\\/g", "/");
+        console.log(path);
+        faviconElement.href = path;
+      }
+    }
+  }, [favicon]);
+
   return (
     <div>
       <Suspense

@@ -96,3 +96,21 @@ export const getData = async (req, res) => {
     });
   }
 };
+
+export const getLogo = async (req, res) => {
+  try {
+    const response = await Company.findOne().select("logo favicon");
+    if (response) {
+      return res.status(200).json({
+        message: "Get Logo",
+        data: response,
+        success: true,
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error While Access Logo",
+      success: false,
+    });
+  }
+};

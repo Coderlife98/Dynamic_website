@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Base_url } from "../constant/constant";
 const Header = () => {
   const [navLink, setNavLink] = useState([]);
+  const [logo, setLogo] = useState();
   const getMenu = async () => {
     try {
       const response = await axios.get(`${Base_url}menu/get`);
@@ -14,15 +15,33 @@ const Header = () => {
       setNavLink(sortedMenu);
     } catch (error) {}
   };
+
+  const getLogo = async () => {
+    try {
+      const response = await axios.get(`${Base_url}company/getLogo`);
+      setLogo(response.data.data.logo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getMenu();
+    getLogo();
   }, []);
   return (
     <div>
-      <div className="bg-black py-4 px-8">
+      <div className="bg-black py-2 px-8">
         <div className="flex items-center justify-between">
           <div>
-            <img src="" alt="logo" />
+            <img
+              src={
+                logo
+                  ? `${Base_url.replace("/api", "")}${logo.replace(/\\/g, "/")}`
+                  : ""
+              }
+              alt="logo"
+              className="w-17"
+            />
           </div>
           <ul className="text-white lg:flex gap-4">
             {navLink
