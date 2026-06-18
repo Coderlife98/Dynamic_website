@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Base_url } from "../constant/constant";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
 const Index = () => {
   const location = useLocation(); //location is a object
   const [sliderState, setSliderState] = useState([]);
@@ -76,34 +79,71 @@ const Index = () => {
     getId();
   }, [location.pathname]);
 
- 
   return (
     <div>
-      <div className="">Index</div>
-      {sliderState.map((slider) => (
-        <div key={slider._id}>
-          <h2>{slider.text}</h2>
-          <img src={`${Base_url}${slider.image}`} alt="slider" width="200" />
-        </div>
-      ))}
-
-      {/*  =================== Teams section start  ===================== */}
-      {teamState.map((items, index) => (
-        <div key={index}>
-          <h4>{items.designation}</h4>
-        </div>
-      ))}
-      {/*  =================== Teams section end ========================== */}
+      <Swiper
+        modules={[Autoplay]}
+        autoplay={{ delay: 3000 }}
+        loop={true}
+        spaceBetween={50}
+        slidesPerView={1}
+        className="mb-4 md:mb-8"
+      >
+        {sliderState.map((slider) => (
+          <SwiperSlide className="relative">
+            <div className="bg-black/50 inset-0 absolute"></div>
+            <div key={slider._id}>
+              <img
+                src={`${Base_url.replace("/api/", "/")}${slider.image.replace("/\\/g", "/")}`}
+                alt="slider"
+                className="w-full h-110 object-cover object-top"
+              />
+              <div className="absolute left-10 top-1/2 -translate-y-1/2 md:w-[65%]">
+                <h2 className="text-2xl heading-text md:text-3xl lg:text-5xl xl:text-5xl text-white">
+                  {slider.heading}
+                </h2>
+                <p className="text-white my-4 heading-text text-lg ">
+                  {slider.subtitle}
+                </p>
+                <Link
+                  to=""
+                  className="bg-yellow-500 px-4 md:px-6 py-3 rounded-sm"
+                >
+                  {slider.slug}
+                </Link>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       {/*  =================== Gallery section Start ========================== */}
-      {galleryState.map((items, index) => (
-        <div key={index}>
-          <img
-            src={`${Base_url}${items.image.replace(/\\/g, "/")}`}
-            alt="gallery"
-          />
+      <div className="container mx-auto">
+        {galleryState && galleryState.length > 0 && (
+          <div>
+            <h2 className="heading-text text-2xl mb-5 font-semibold md:text-3xl lg:text-5xl">
+              Our Gallery
+            </h2>
+          </div>
+        )}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 mb-8 gap-5">
+          {galleryState.map((items, index) => (
+            <div key={index} className="border border-slate-300 shadow-lg p-2">
+              <Link
+                target="_blank"
+                rel="noopener noreferrer"
+                to={`${Base_url.replace("/api/", "/")}${items.image.replace(/\\/g, "/")}`}
+              >
+                <img
+                  src={`${Base_url.replace("/api/", "/")}${items.image.replace(/\\/g, "/")}`}
+                  alt="gallery"
+                  className="h-86 w-full object-cover object-top"
+                />
+              </Link>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
       {/*  =================== Gallery section end ========================== */}
 
       {/*  =================== Blog section Start ========================== */}
@@ -113,6 +153,40 @@ const Index = () => {
         </div>
       ))}
       {/*  =================== Blog section End ========================== */}
+
+      {/*  =================== Teams section start  ===================== */}
+
+      <div className="container mx-auto">
+        {teamState && teamState.length > 0 && (
+          <div>
+            <h2 className="heading-text text-2xl mt-20 mb-5 font-semibold md:text-3xl lg:text-5xl">
+              Our Team Members
+            </h2>
+          </div>
+        )}
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 mb-8 gap-5">
+          {teamState.map((items, index) => (
+            <div
+              key={index}
+              className="border p-1 border-slate-300 rounded-t-xl"
+            >
+              <div>
+                <img
+                  src={`${Base_url.replace("/api/", "/")}${items.image.replace("/\\/g", "/")}`}
+                  className="h-74 w-full object-cover object-top"
+                  alt=""
+                />
+              </div>
+              <div className="my-2">
+                <h4 className="text-center font-semibold">{items.name}</h4>
+                <p className="text-center">{items.designation}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/*  =================== Teams section end ========================== */}
 
       {/*  =================== Testimonial section Start ========================== */}
       {testimonialState.map((items, index) => (

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import axios from "axios";
 import Index from "./Pages/Index";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
@@ -8,18 +9,17 @@ import WebsiteLayout from "./component/WebsiteLayout";
 import AdminLayout from "./component/Admin/AdminLayout";
 import ProtectedRoute from "./component/Admin/ProtectedRoute";
 import PublicRoute from "./component/Admin/PublicRoute";
-import Add_Menu from "./Pages/Admin/Add_Menu";
-import ChildMenu from "./Pages/Admin/ChildMenu";
-import Page from "./Pages/Admin/Page";
-import Slider from "./Pages/Admin/Slider";
-import Hero from "./Pages/Admin/Hero";
-import Faq from "./Pages/Admin/Faq";
-import News from "./Pages/Admin/News";
-import Testimonial from "./Pages/Admin/Testimonial";
-import Team from "./Pages/Admin/Team";
-import Gallery from "./Pages/Admin/Gallery";
-import axios from "axios";
 import { Base_url } from "./constant/constant";
+const Add_Menu = lazy(() => import("./Pages/Admin/Add_Menu"));
+const ChildMenu = lazy(() => import("./Pages/Admin/ChildMenu"));
+const Page = lazy(() => import("./Pages/Admin/Page"));
+const Slider = lazy(() => import("./Pages/Admin/Slider"));
+const Hero = lazy(() => import("./Pages/Admin/Hero"));
+const Faq = lazy(() => import("./Pages/Admin/Faq"));
+const News = lazy(() => import("./Pages/Admin/News"));
+const Testimonial = lazy(() => import("./Pages/Admin/Testimonial"));
+const Team = lazy(() => import("./Pages/Admin/Team"));
+const Gallery = lazy(() => import("./Pages/Admin/Gallery"));
 const Login = lazy(() => import("./Pages/Login"));
 const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
 const Setting = lazy(() => import("./Pages/Admin/Setting"));
@@ -46,7 +46,6 @@ const App = () => {
       if (faviconElement) {
         const path =
           Base_url.replace("/api/", "/") + favicon.replace("/\\/g", "/");
-        console.log(path);
         faviconElement.href = path;
       }
     }
