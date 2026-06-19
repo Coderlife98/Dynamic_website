@@ -45,7 +45,6 @@ export const operationMission = async (req, res) => {
       // Update existing mission ============================================ /////////////////////
 
       if (req.file) {
-        console.log(isDataExist.image);
         if (isDataExist.image && fs.existsSync(isDataExist.image)) {
           fs.unlinkSync(isDataExist.image);
         }

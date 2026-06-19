@@ -18,6 +18,8 @@ import BackgroundRoute from "./routes/Background.route.js";
 import testimonialRoute from "./routes/Testimonial.route.js";
 import ContactRoute from "./routes/Contact.route.js";
 import MissionRoute from "./routes/Mission.route.js";
+import PartnerRoute from "./routes/Our_Partner.route.js";
+import ProductCardRoute from "./routes/ProductCard.route.js";
 import { dbConfig } from "./config/dbconfig.js";
 
 dotenv.config();
@@ -43,6 +45,9 @@ app.use("/api/about", AboutRoute);
 app.use("/api/background", BackgroundRoute);
 app.use("/api/contact", ContactRoute);
 app.use("/api/mission", MissionRoute);
+app.use("/api/partner", PartnerRoute);
+app.use("/api/product", ProductCardRoute);
+
 // +++++++++++++++++++++++++++++++++ ACCESS ROUTE END +++++++++++++++++++++++++++++++++++++++ //
 
 // +++++++++++++++++++++++++++++++++ Define PORT  Start +++++++++++++++++++++++++++++++++++++++ //

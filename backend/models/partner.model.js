@@ -1,27 +1,16 @@
 import mongoose from "mongoose";
 
-const productCardSchema = new mongoose.Schema(
+const partnerSchema = new mongoose.Schema(
   {
     image: {
       type: String,
       required: true,
     },
-    name: {
+    heading: {
       type: String,
       required: true,
     },
-    description: {
-      type: String,
-      required: true,
-    },
-    price: {
-      type: String,
-      required: true,
-    },
-    discount_price: {
-      type: String,
-      required: true,
-    },
+
     menuId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Menu",
@@ -35,4 +24,4 @@ const productCardSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export const ProductCard = mongoose.model("ProductCard", productCardSchema);
+export const Partner = mongoose.model("Partner", partnerSchema);
