@@ -20,6 +20,9 @@ import ContactRoute from "./routes/Contact.route.js";
 import MissionRoute from "./routes/Mission.route.js";
 import PartnerRoute from "./routes/Our_Partner.route.js";
 import ProductCardRoute from "./routes/ProductCard.route.js";
+import ServiceCardRoute from "./routes/Service.route.js";
+import VisionRoute from "./routes/Vision.route.js";
+import WhyRoute from "./routes/Why.route.js";
 import { dbConfig } from "./config/dbconfig.js";
 
 dotenv.config();
@@ -47,6 +50,9 @@ app.use("/api/contact", ContactRoute);
 app.use("/api/mission", MissionRoute);
 app.use("/api/partner", PartnerRoute);
 app.use("/api/product", ProductCardRoute);
+app.use("/api/service", ServiceCardRoute);
+app.use("/api/vision", VisionRoute);
+app.use("/api/why", WhyRoute);
 
 // +++++++++++++++++++++++++++++++++ ACCESS ROUTE END +++++++++++++++++++++++++++++++++++++++ //
 
