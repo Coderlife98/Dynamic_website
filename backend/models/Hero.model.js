@@ -19,7 +19,7 @@ const HeroSchema = new mongoose.Schema(
       ref: "Menu",
       default: null,
     },
-    status: {
+    isActive: {
       type: Boolean,
       default: false,
     },

@@ -5,7 +5,7 @@ export const addTeam = async (req, res) => {
     const {
       name,
       designation,
-      status,
+      isActive,
       menuId,
       social_media,
       facebook,
@@ -39,7 +39,7 @@ export const addTeam = async (req, res) => {
       name,
       designation,
       menuId,
-      status,
+      isActive,
       social_media: {
         facebook,
         instagram,

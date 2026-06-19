@@ -2,7 +2,7 @@ import { Faq } from "../models/Faq.model.js";
 
 export const addFaq = async (req, res) => {
   try {
-    const { title, description, status, menuId } = req.body;
+    const { title, description, isActive, menuId } = req.body;
     if (!title) {
       return res.status(404).json({
         message: "Enter Title for Blog !!",
@@ -20,7 +20,7 @@ export const addFaq = async (req, res) => {
     const data = {
       title,
       description,
-      status,
+      isActive,
       menuId,
     };
 

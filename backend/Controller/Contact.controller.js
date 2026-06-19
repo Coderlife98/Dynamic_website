@@ -3,7 +3,8 @@ import { Contact } from "../models/Contact.model.js";
 
 export const addContact = async (req, res) => {
   try {
-    const { name, emailId, mobile, subject, menuId, message } = req.body;
+    const { name, emailId, mobile, subject, menuId, message, isActive } =
+      req.body;
 
     if (!name) {
       return res.status(404).json({
@@ -39,6 +40,7 @@ export const addContact = async (req, res) => {
       mobile,
       subject,
       menuId,
+      isActive,
       message,
     };
 

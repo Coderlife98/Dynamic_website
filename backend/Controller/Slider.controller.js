@@ -2,7 +2,7 @@ import Slider from "../models/Slider.model.js";
 
 export const createSlider = async (req, res) => {
   try {
-    const { heading, subtitle, slug, menuId } = req.body;
+    const { heading, subtitle, slug, menuId, isActive } = req.body;
     if (!req.file) {
       return res.status(404).json({
         message: "Select image !!!",
@@ -33,6 +33,7 @@ export const createSlider = async (req, res) => {
       slug,
       subtitle,
       menuId,
+      isActive,
       image: req.file.path,
     };
 

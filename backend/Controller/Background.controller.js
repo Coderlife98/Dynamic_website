@@ -2,7 +2,7 @@ import { Background } from "../models/Background.model.js";
 
 export const addBackground = async (req, res) => {
   try {
-    const { heading, description, status, menuId } = req.body;
+    const { heading, description, isActive, menuId } = req.body;
     if (!heading) {
       return res.status(404).json({
         message: "Enter Heading",
@@ -27,7 +27,7 @@ export const addBackground = async (req, res) => {
     const data = {
       heading,
       description,
-      status,
+      isActive,
       menuId,
       image: req.file.path,
     };

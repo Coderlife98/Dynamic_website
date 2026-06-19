@@ -3,7 +3,7 @@ import { ProductCard } from "../models/ProductCard.model.js";
 
 export const addProductCard = async (req, res) => {
   try {
-    const { name, price, description, discount_price, menuId, status } =
+    const { name, price, description, discount_price, menuId, isActive } =
       req.body;
     if (!name) {
       return res.status(404).json({
@@ -43,7 +43,7 @@ export const addProductCard = async (req, res) => {
       description,
       discount_price,
       menuId,
-      status,
+      isActive,
     };
     const createProduct = await ProductCard.create(data);
     if (createProduct) {

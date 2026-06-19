@@ -26,7 +26,7 @@ const teamSchema = new mongoose.Schema(
       twitter: String,
       youtube: String,
     },
-    status: {
+    isActive: {
       type: Boolean,
       default: false,
     },

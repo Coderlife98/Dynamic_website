@@ -3,7 +3,7 @@ import { About } from "../models/About.model.js";
 import fs from "fs";
 export const addAbout = async (req, res) => {
   try {
-    const { heading, subheading, description, menuId } = req.body;
+    const { heading, subheading, description, menuId, isActive } = req.body;
 
     if (!heading) {
       return res.status(400).json({
@@ -33,6 +33,7 @@ export const addAbout = async (req, res) => {
       subheading,
       description,
       menuId,
+      isActive,
       image_1,
       image_2,
     };
@@ -75,5 +76,3 @@ export const getData = async (req, res) => {
     });
   }
 };
-
-

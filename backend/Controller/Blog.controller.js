@@ -2,7 +2,7 @@ import { Blog } from "../models/Blog.model.js";
 
 export const addBlog = async (req, res) => {
   try {
-    const { title, description, status, menuId } = req.body;
+    const { title, description, isActive, menuId } = req.body;
     if (!req.file) {
       return res.status(404).json({
         message: "Select File !!",
@@ -28,7 +28,7 @@ export const addBlog = async (req, res) => {
       title,
       image: req.file.path,
       description,
-      status,
+      isActive,
       menuId,
     };
 

@@ -2,7 +2,7 @@ import { News } from "../models/News.model.js";
 
 export const addNews = async (req, res) => {
   try {
-    const { title, menuId, category } = req.body;
+    const { title, menuId, category, isActive } = req.body;
     if (!title) {
       return res.status(404).json({
         message: "Enter News !!",
@@ -19,6 +19,7 @@ export const addNews = async (req, res) => {
     const data = {
       title,
       menuId,
+      isActive,
       category,
     };
 

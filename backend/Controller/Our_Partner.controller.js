@@ -3,7 +3,7 @@ import { Partner } from "../models/partner.model.js";
 
 export const operationPartner = async (req, res) => {
   try {
-    const { heading } = req.body;
+    const { heading, isActive, menuId } = req.body;
     const getPartner = await Partner.findOne();
     if (!getPartner) {
       if (!heading) {
@@ -22,6 +22,8 @@ export const operationPartner = async (req, res) => {
       const data = {
         image: req.file.path,
         heading,
+        menuId,
+        isActive,
       };
       const createPartner = await Partner.create(data);
       if (createPartner) {
@@ -41,6 +43,7 @@ export const operationPartner = async (req, res) => {
       }
 
       getPartner.heading = heading || getPartner.heading;
+      getPartner.isActive = isActive || getPartner.isActive;
 
       await getPartner.save();
 

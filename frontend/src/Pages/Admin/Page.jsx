@@ -153,7 +153,7 @@ const Page = () => {
           <div>
             <h3 className="text-center text-slate-400 text-xl">Our Partner</h3>
             <Link
-              to={`/dashboard/out_partner/${id}`}
+              to={`/dashboard/our_partner/${id}`}
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Partner +
@@ -200,10 +200,10 @@ const Page = () => {
         <div className="border border-slate-800 px-4 py-6  ">
           <div>
             <h3 className="text-center text-slate-400 text-xl">
-              Why Choose Us
+              Background Attachment
             </h3>
             <Link
-              to={`/dashboard/why_choose_us/${id}`}
+              to={`/dashboard/background_attachment/${id}`}
               className="bg-indigo-500 text-white py-2 inline-block text-center mt-4 w-full"
             >
               Add Background Attachment +

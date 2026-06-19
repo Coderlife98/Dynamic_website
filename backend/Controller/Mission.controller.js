@@ -2,7 +2,7 @@ import { Mission } from "../models/Mission.model.js";
 import fs, { existsSync } from "fs";
 export const operationMission = async (req, res) => {
   try {
-    const { heading, description, menuId, status } = req.body;
+    const { heading, description, menuId, isActive } = req.body;
     const isDataExist = await Mission.findOne();
     if (!isDataExist) {
       if (!heading) {
@@ -30,7 +30,7 @@ export const operationMission = async (req, res) => {
         heading,
         description,
         menuId,
-        status,
+        isActive,
         image: req.file.path,
       };
       const createdMission = await Mission.create(data);
@@ -53,7 +53,7 @@ export const operationMission = async (req, res) => {
       }
       isDataExist.heading = heading || isDataExist.heading;
       isDataExist.description = description || isDataExist.description;
-      isDataExist.status = status || isDataExist.status;
+      isDataExist.isActive = isActive || isDataExist.isActive;
       isDataExist.menuId = menuId || isDataExist.menuId;
 
       await isDataExist.save();

@@ -2,7 +2,7 @@ import { Hero } from "../models/Hero.model.js";
 
 export const AddHero = async (req, res) => {
   try {
-    const { title, category, menuId } = req.body;
+    const { title, category, menuId, isActive } = req.body;
     if (!req.file) {
       return res.status(404).json({
         message: "Select Image !!",
@@ -20,6 +20,7 @@ export const AddHero = async (req, res) => {
       title,
       category,
       menuId,
+      isActive,
       image: req.file.path,
     };
     const response = await Hero.create(data);

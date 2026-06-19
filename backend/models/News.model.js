@@ -15,7 +15,7 @@ const newsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    status: {
+    isActive: {
       type: Boolean,
       default: false,
     },

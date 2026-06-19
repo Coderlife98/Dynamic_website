@@ -3,7 +3,7 @@ import { Testimonial } from "../models/Testimonial.model.js";
 
 export const addTestimonial = async (req, res) => {
   try {
-    const { name, description, status, menuId, category } = req.body;
+    const { name, description, isActive, menuId, category } = req.body;
     if (!req.file) {
       return res.status(404).json({
         message: "Select Image !!",
@@ -37,7 +37,7 @@ export const addTestimonial = async (req, res) => {
       description,
       menuId,
       category,
-      status,
+      isActive,
     };
 
     const response = await Testimonial.create(data);

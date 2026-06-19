@@ -2,7 +2,7 @@ import { Service } from "../models/Service.model.js";
 import fs from "fs";
 export const operationService = async (req, res) => {
   try {
-    const { heading, subheading, description, menuId, status } = req.body;
+    const { heading, subheading, description, menuId, isActive } = req.body;
     const findData = await Service.findOne();
     if (!findData) {
       if (!heading) {
@@ -39,7 +39,7 @@ export const operationService = async (req, res) => {
         subheading,
         description,
         menuId,
-        status,
+        isActive,
       };
       const createService = await Service.create(data);
       if (createService) {
@@ -61,7 +61,7 @@ export const operationService = async (req, res) => {
       findData.heading = heading || findData.heading;
       findData.subheading = subheading || findData.subheading;
       findData.description = description || findData.description;
-      findData.status = status || findData.status;
+      findData.isActive = isActive || findData.isActive;
 
       await findData.save();
 

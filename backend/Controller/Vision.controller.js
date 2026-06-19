@@ -2,7 +2,7 @@ import { Vision } from "../models/Vision.model.js";
 import fs from "fs";
 export const operationVision = async (req, res) => {
   try {
-    const { heading, status, menuId, description } = req.body;
+    const { heading, isActive, menuId, description } = req.body;
     const getData = await Vision.findOne();
     if (!getData) {
       if (!heading) {
@@ -28,7 +28,7 @@ export const operationVision = async (req, res) => {
       const data = {
         image: req.file.path,
         heading,
-        status,
+        isActive,
         menuId,
         description,
       };
@@ -51,7 +51,7 @@ export const operationVision = async (req, res) => {
 
       getData.heading = heading || getData.heading;
       getData.description = description || getData.description;
-      getData.status = status || getData.status;
+      getData.isActive = isActive || getData.isActive;
 
       await getData.save();
       return res.status(200).json({

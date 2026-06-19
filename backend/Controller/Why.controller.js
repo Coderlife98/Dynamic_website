@@ -2,7 +2,7 @@ import { Why_choose } from "../models/Why.model.js";
 import fs from "fs";
 export const operationWhy = async (req, res) => {
   try {
-    const { heading, description, status, menuId } = req.body;
+    const { heading, description, isActive, menuId } = req.body;
     const isExistData = await Why_choose.findOne();
     if (!isExistData) {
       if (!heading) {
@@ -30,7 +30,7 @@ export const operationWhy = async (req, res) => {
         image: req.file.path,
         heading,
         description,
-        status,
+        isActive,
         menuId,
       };
 
@@ -53,7 +53,7 @@ export const operationWhy = async (req, res) => {
 
       isExistData.heading = heading || isExistData.heading;
       isExistData.description = description || isExistData.description;
-      isExistData.status = status || isExistData.status;
+      isExistData.isActive = isActive || isExistData.isActive;
 
       await isExistData.save();
       return res.status(200).json({
