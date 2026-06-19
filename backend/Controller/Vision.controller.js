@@ -1,6 +1,6 @@
 import { Vision } from "../models/Vision.model.js";
 import fs from "fs";
-export const addVision = async (req, res) => {
+export const operationVision = async (req, res) => {
   try {
     const { heading, status, menuId, description } = req.body;
     const getData = await Vision.findOne();

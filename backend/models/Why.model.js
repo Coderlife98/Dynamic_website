@@ -14,15 +14,15 @@ const whychooseusSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    bulletPoints: {
-      type: [String],
-      validate: {
-        validator: function (value) {
-          return value.length === 6;
-        },
-        message: "Exactly 6 bullet points are required",
-      },
-    },
+    // bulletPoints: {
+    //   type: [String],
+    //   validate: {
+    //     validator: function (value) {
+    //       return value.length === 6;
+    //     },
+    //     message: "Exactly 6 bullet points are required",
+    //   },
+    // },
     menuId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Menu",
