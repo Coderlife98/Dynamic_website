@@ -1,6 +1,6 @@
 import { Mission } from "../models/Mission.model.js";
 import fs, { existsSync } from "fs";
-export const addMission = async (req, res) => {
+export const operationMission = async (req, res) => {
   try {
     const { heading, description, menuId, status } = req.body;
     const isDataExist = await Mission.findOne();
@@ -45,7 +45,6 @@ export const addMission = async (req, res) => {
       // Update existing mission ============================================ /////////////////////
 
       if (req.file) {
-        // Delete old image
         console.log(isDataExist.image);
         if (isDataExist.image && fs.existsSync(isDataExist.image)) {
           fs.unlinkSync(isDataExist.image);
@@ -64,6 +63,25 @@ export const addMission = async (req, res) => {
         message: "Mission Updated Successfully",
         success: true,
         data: isDataExist,
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: error.message,
+      success: false,
+    });
+  }
+};
+
+export const getMission = async (req, res) => {
+  try {
+    const getData = await Mission.find();
+    if (getData) {
+      return res.status(200).json({
+        message: "Get Mission Data",
+        success: true,
+        data: getData,
       });
     }
   } catch (error) {
