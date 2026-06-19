@@ -4,14 +4,14 @@ export const addGallery = async (req, res) => {
   try {
     const { isActive, menuId, category } = req.body;
     if (!req.file) {
-      return res.status(404).json({
+      return res.status(400).json({
         message: "Select image !!!",
         success: false,
       });
     }
 
     if (!category) {
-      return res.status(404).json({
+      return res.status(400).json({
         message: "Enter Category !!!",
         success: false,
       });
@@ -26,7 +26,7 @@ export const addGallery = async (req, res) => {
 
     const response = await Gallery.create(data);
     if (response) {
-      return res.status(200).json({
+      return res.status(201).json({
         message: "Added Gallery Image !!",
         success: true,
         data: response,

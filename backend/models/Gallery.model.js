@@ -23,4 +23,4 @@ const gallerySchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export const Gallery = await mongoose.model("Gallery", gallerySchema);
+export const Gallery =  mongoose.model("Gallery", gallerySchema);

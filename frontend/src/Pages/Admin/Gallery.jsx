@@ -60,7 +60,6 @@ const Gallery = () => {
                 required
                 onChange={(e) => setImage(e.target.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Title"
               />
             </div>
             <div>
@@ -68,9 +67,10 @@ const Gallery = () => {
               <input
                 type="text"
                 name="category"
+                value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
-                placeholder="Enter Description"
+                placeholder="Enter Category"
               />
             </div>
             <div>
