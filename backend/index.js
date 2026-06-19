@@ -16,6 +16,7 @@ import HeroRoute from "./routes/Hero.route.js";
 import AboutRoute from "./routes/About.route.js";
 import BackgroundRoute from "./routes/Background.route.js";
 import testimonialRoute from "./routes/Testimonial.route.js";
+import ContactRoute from "./routes/Contact.route.js";
 import { dbConfig } from "./config/dbconfig.js";
 
 dotenv.config();
@@ -39,6 +40,7 @@ app.use("/api/company", company);
 app.use("/api/hero", HeroRoute);
 app.use("/api/about", AboutRoute);
 app.use("/api/background", BackgroundRoute);
+app.use("/api/contact", ContactRoute);
 // +++++++++++++++++++++++++++++++++ ACCESS ROUTE END +++++++++++++++++++++++++++++++++++++++ //
 
 // +++++++++++++++++++++++++++++++++ Define PORT  Start +++++++++++++++++++++++++++++++++++++++ //
