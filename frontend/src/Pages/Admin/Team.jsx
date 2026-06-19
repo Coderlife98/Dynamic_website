@@ -24,7 +24,7 @@ const Team = () => {
       formData.append("image", image);
       formData.append("name", name);
       formData.append("menuId", id);
-      formData.append("status", status);
+      formData.append("isActive", status);
       formData.append("designation", designation);
       formData.append("facebook", facebook);
       formData.append("instagram", instagram);

@@ -17,7 +17,7 @@ const Gallery = () => {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("menuId", id);
-      formData.append("status", status);
+      formData.append("isActive", status);
       formData.append("category", category);
       const response = await axios.post(
         `${Base_url}gallery/Gallery/add`,

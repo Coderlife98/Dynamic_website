@@ -14,7 +14,7 @@ const News = () => {
     try {
       const data = {
         title,
-        status,
+        isActive,
         category,
         menuId: id,
       };

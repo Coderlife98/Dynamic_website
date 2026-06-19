@@ -21,7 +21,7 @@ const Testimonial = () => {
       formData.append("image", image);
       formData.append("name", name);
       formData.append("menuId", id);
-      formData.append("status", status);
+      formData.append("isActive", status);
       formData.append("category", category);
       formData.append("designation", designation);
       formData.append("description", description);
