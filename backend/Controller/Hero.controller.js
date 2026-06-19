@@ -37,3 +37,27 @@ export const AddHero = async (req, res) => {
     });
   }
 };
+
+export const getHero = async (req, res) => {
+  try {
+    const getData = await Hero.find();
+    if (!getData) {
+      return res.status(404).json({
+        message: "Error while Find data !!",
+        success: false,
+      });
+    } else {
+      return res.status(200).json({
+        message: "get Hero Banner !!",
+        success: true,
+        data: getData,
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      message: "get Hero Banner !!",
+      error: error.message,
+      success: false,
+    });
+  }
+};
