@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Base_url } from "../../constant/constant";
 import toast from "react-hot-toast";
+import { AiFillDelete } from "react-icons/ai";
+import { MdEdit } from "react-icons/md";
 
 const Slider = () => {
   const [heading, setHeading] = useState("");
@@ -46,6 +48,7 @@ const Slider = () => {
         setSlug("");
         setSubtitle("");
         formRef.current.reset();
+        getSlider();
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
@@ -54,13 +57,34 @@ const Slider = () => {
 
   const getSlider = async () => {
     try {
-      const getData = await axios.get(`${Base_url}slider/get`);
+      const getData = await axios.get(`${Base_url}slider/get/${id}`);
       setSliderData(getData.data.data);
-      console.log(sliderData);
     } catch (error) {
       console.log(error);
     }
   };
+
+  // ++++++++++++++++++++++++++++++++++ Delete +++++++++++++++++++++++++++++++++++++++
+
+  const deleteSlider = async (id) => {
+    try {
+      const isConfirmed = window.confirm(
+        "Are you sure you want to delete this slider?",
+      );
+
+      if (!isConfirmed) return;
+
+      const deleteData = await axios.delete(`${Base_url}slider/delete/${id}`);
+      if (deleteData) {
+        toast.success(deleteData.data.message);
+        getSlider();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // ++++++++++++++++++++++++++++++++++ Delete +++++++++++++++++++++++++++++++++++++++
 
   useEffect(() => {
     document.title = "Add Slider || Dashboard";
@@ -103,6 +127,7 @@ const Slider = () => {
                 type="text"
                 name="heading"
                 id="heading"
+                value={heading}
                 required
                 onChange={(e) => setHeading(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -114,6 +139,7 @@ const Slider = () => {
               <input
                 type="text"
                 name="subtitle"
+                // value={subtitle}
                 id="subtitle"
                 onChange={(e) => setSubtitle(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -127,6 +153,7 @@ const Slider = () => {
                 type="text"
                 name="slug"
                 id="slug"
+                value={slug}
                 required
                 onChange={(e) => setSlug(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -172,9 +199,20 @@ const Slider = () => {
                   <p className="text-slate-300 my-2 text-sm">
                     {items.subtitle}
                   </p>
-                  <button disabled className="bg-yellow-500 py-2 px-5">
-                    {items.slug}
-                  </button>
+                  <div className="flex items-center justify-between">
+                    <button disabled className="bg-yellow-500 py-2 px-5">
+                      {items.slug}
+                    </button>
+                    <div className="flex items-center gap-3">
+                      <AiFillDelete
+                        onClick={() => {
+                          deleteSlider(items._id);
+                        }}
+                        className="text-2xl cursor-pointer text-red-600"
+                      />
+                      <MdEdit className="text-2xl cursor-pointer text-sky-600" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

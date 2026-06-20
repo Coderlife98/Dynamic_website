@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Slider from "../models/Slider.model.js";
 
 export const createSlider = async (req, res) => {
@@ -67,6 +68,55 @@ export const getSlider = async (req, res) => {
     return res.status(404).json({
       message: "Error while accessing slider",
       success: false,
+      error: error.message,
+    });
+  }
+};
+
+export const getSliderById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({
+        message: "Invalid Id",
+        success: false,
+      });
+    }
+
+    const getSliders = await Slider.find({
+      menuId: id,
+    });
+
+    return res.status(200).json({
+      message: "Get Data",
+      data: getSliders,
+      success: true,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error while accessing slider",
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+export const deleteSliderById = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const deleteSlider = await Slider.findByIdAndDelete(id);
+    if (deleteSlider) {
+      return res.status(200).json({
+        message: "Slider Deleted !!",
+        success: true,
+        data: deleteSlider,
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error while Deleting slider",
+      success: false,
+      error: error.message,
     });
   }
 };
