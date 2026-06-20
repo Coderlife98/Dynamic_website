@@ -12,12 +12,12 @@ export const operationService = async (req, res) => {
         });
       }
 
-      if (!subheading) {
-        return res.status(404).json({
-          message: "Enter Sub-Heading !!",
-          success: false,
-        });
-      }
+      // if (!subheading) {
+      //   return res.status(404).json({
+      //     message: "Enter Sub-Heading !!",
+      //     success: false,
+      //   });
+      // }
 
       if (!description) {
         return res.status(404).json({
