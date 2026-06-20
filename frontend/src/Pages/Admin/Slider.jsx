@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import BreadCrumb from "../../component/Admin/BreadCrumb";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Base_url } from "../../constant/constant";
 import toast from "react-hot-toast";
@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 const Slider = () => {
   const [heading, setHeading] = useState("");
   const [subtitle, setSubtitle] = useState("");
+  const [sliderData, setSliderData] = useState([]);
   const [slug, setSlug] = useState("");
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState("");
@@ -51,13 +52,30 @@ const Slider = () => {
     }
   };
 
+  const getSlider = async () => {
+    try {
+      const getData = await axios.get(`${Base_url}slider/get`);
+      setSliderData(getData.data.data);
+      console.log(sliderData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     document.title = "Add Slider || Dashboard";
   });
+
+  useEffect(() => {
+    getSlider();
+  }, []);
+
   return (
     <div>
       <div>
         <BreadCrumb title="Slider" />
+
+        <div className="text-end"></div>
       </div>
       <div className="mt-4  md:py-4   px-2 border border-slate-800  text-white">
         <div className="md:px-4">
@@ -134,6 +152,33 @@ const Slider = () => {
             </button>
           </div>
         </form>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-5">
+        {sliderData &&
+          sliderData.length > 0 &&
+          sliderData.map((items, index) => (
+            <div className="mt-4 border p-2 border-slate-800" key={index}>
+              <div>
+                <img
+                  src={`${Base_url.replace("/api/", "/")}${items.image}`}
+                  className="w-full h-52"
+                  alt=""
+                />
+                <div className="my-2">
+                  <h5 className="text-slate-300 my-2 text-lg">
+                    {items.heading}
+                  </h5>
+                  <p className="text-slate-300 my-2 text-sm">
+                    {items.subtitle}
+                  </p>
+                  <button disabled className="bg-yellow-500 py-2 px-5">
+                    {items.slug}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );
