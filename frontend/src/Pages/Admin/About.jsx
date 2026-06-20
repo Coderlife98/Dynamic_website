@@ -1,18 +1,66 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BreadCrumb from "../../component/Admin/BreadCrumb";
-
+import axios from "axios";
+import { Base_url } from "../../constant/constant";
+import toast from "react-hot-toast";
 const About = () => {
   const [heading, setHeading] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [image_1, setImage_1] = useState(null);
   const [image_2, setImage_2] = useState(null);
+  const [hasAboutData, setHasAboutData] = useState(false);
   const formRef = useRef();
+
   const handleAbout = async (event) => {
+    event.preventDefault();
     try {
-      event.preventDefault();
-    } catch (error) {}
+      const formData = new FormData();
+      formData.append("heading", heading);
+      formData.append("description", description);
+      formData.append("isActive", status);
+      formData.append("image_1", image_1);
+      formData.append("image_2", image_2);
+
+      const operation = await axios.post(
+        `${Base_url}about/About/add`,
+        formData,
+      );
+      if (operation) {
+        toast.success(operation.data.message);
+        setHeading("");
+        setDescription("");
+        setImage_1(null);
+        setImage_2(null);
+        setStatus("");
+        formRef.current.reset();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+  useEffect(() => {
+    const getAbout = async () => {
+      try {
+        const res = await axios.get(`${Base_url}about/get`);
+
+        if (res.data && res.data.data) {
+          setHasAboutData(true);
+          setHeading("");
+          setDescription("");
+          setImage_1(null);
+          setImage_2(null);
+          setStatus("");
+          formRef.current.reset();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getAbout();
+  }, []);
+
   return (
     <div>
       <BreadCrumb title="About Us" />
@@ -33,7 +81,7 @@ const About = () => {
                 name="image_1"
                 id="image_1"
                 accept="image/png, image/jpg, image/jpeg, image/webp"
-                required
+                required={!hasAboutData}
                 onChange={(e) => setImage_1(e.target.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
               />
@@ -75,6 +123,7 @@ const About = () => {
               <label htmlFor="isActive">Status</label> <br />
               <select
                 name="isActive"
+                value={status}
                 className="w-full border border-slate-600 p-2"
                 onChange={(e) => setStatus(e.target.value)}
                 id="isActive"
