@@ -45,7 +45,6 @@ const Our_Partner = () => {
       const getData = await axios.get(`${Base_url}partner/get`);
       if (getData) {
         setHasAboutData(true);
-        console.log(getData);
       }
     } catch (error) {
       console.log(error);
