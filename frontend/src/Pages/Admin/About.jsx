@@ -3,6 +3,7 @@ import BreadCrumb from "../../component/Admin/BreadCrumb";
 import axios from "axios";
 import { Base_url } from "../../constant/constant";
 import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 const About = () => {
   const [heading, setHeading] = useState("");
   const [description, setDescription] = useState("");
@@ -11,6 +12,7 @@ const About = () => {
   const [image_2, setImage_2] = useState(null);
   const [hasAboutData, setHasAboutData] = useState(false);
   const formRef = useRef();
+  const { id } = useParams();
 
   const handleAbout = async (event) => {
     event.preventDefault();
@@ -20,6 +22,7 @@ const About = () => {
       formData.append("description", description);
       formData.append("isActive", status);
       formData.append("image_1", image_1);
+      formData.append("menuId", id);
       formData.append("image_2", image_2);
 
       const operation = await axios.post(
@@ -82,7 +85,7 @@ const About = () => {
                 id="image_1"
                 accept="image/png, image/jpg, image/jpeg, image/webp"
                 required={!hasAboutData}
-                onChange={(e) => setImage_1(e.target.files[0])}
+                onChange={(e) => setImage_1(e.target?.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
               />
             </div>
@@ -93,7 +96,7 @@ const About = () => {
                 name="image_2"
                 id="image_2"
                 accept="image/png, image/jpg, image/jpeg, image/webp"
-                onChange={(e) => setImage_2(e.target.files[0])}
+                onChange={(e) => setImage_2(e.target?.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
               />
             </div>
@@ -103,7 +106,7 @@ const About = () => {
                 type="text"
                 name="heading"
                 id="heading"
-                onChange={(e) => setHeading(e.target.value)}
+                onChange={(e) => setHeading(e.target?.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
                 placeholder="Enter Heading"
               />
@@ -114,7 +117,7 @@ const About = () => {
                 type="text"
                 name="description"
                 id="description"
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target?.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
                 placeholder="Enter Description"
               />
@@ -125,7 +128,7 @@ const About = () => {
                 name="isActive"
                 value={status}
                 className="w-full border border-slate-600 p-2"
-                onChange={(e) => setStatus(e.target.value)}
+                onChange={(e) => setStatus(e.target?.value)}
                 id="isActive"
               >
                 <option value="">-- Select --</option>
