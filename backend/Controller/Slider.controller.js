@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import Slider from "../models/Slider.model.js";
-
+import fs from "fs";
 export const createSlider = async (req, res) => {
   try {
     const { heading, subtitle, slug, menuId, isActive } = req.body;
@@ -117,6 +117,57 @@ export const deleteSliderById = async (req, res) => {
       message: "Error while Deleting slider",
       success: false,
       error: error.message,
+    });
+  }
+};
+
+export const updateSliderById = async (req, res) => {
+  try {
+    const { heading, subtitle, slug, isActive, categories } = req.body;
+    const id = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({
+        message: "Invalid Id",
+        success: false,
+      });
+    }
+
+    const getData = await Slider.findById(id);
+    if (!getData) {
+      return res.status(404).json({
+        message: "Data not exist",
+        success: false,
+      });
+    }
+
+    if (req.file) {
+      if (getData?.image && fs.existsSync(getData?.image)) {
+        fs.unlinkSync(getData?.image);
+      }
+
+      getData.image = req.file.path;
+    }
+
+    getData.heading = heading || getData.heading;
+    getData.subtitle = subtitle || getData.subtitle;
+    getData.slug = slug || getData.slug;
+    getData.categories = categories || getData.categories;
+    getData.isActive = isActive || getData.isActive;
+
+    await getData.save();
+
+    return res.status(200).json({
+      message: "Updated Succesfully",
+      success: true,
+      data: getData,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({
+      message: "Error While Updating Slider !!",
+      success: false,
+      error: error,
     });
   }
 };

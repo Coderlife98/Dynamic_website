@@ -14,6 +14,8 @@ const Slider = () => {
   const [slug, setSlug] = useState("");
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [editId, setEditId] = useState(null);
   const formRef = useRef();
 
   // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -65,7 +67,6 @@ const Slider = () => {
   };
 
   // ++++++++++++++++++++++++++++++++++ Delete +++++++++++++++++++++++++++++++++++++++
-
   const deleteSlider = async (id) => {
     try {
       const isConfirmed = window.confirm(
@@ -83,8 +84,35 @@ const Slider = () => {
       console.log(error);
     }
   };
-
   // ++++++++++++++++++++++++++++++++++ Delete +++++++++++++++++++++++++++++++++++++++
+
+  //  +++++++++++++++++++++++++++++++ Edit ++++++++++++++++++++++++++++++++++++++++++
+  const handleEdit = async (item) => {
+    setIsEditing(true);
+    setEditId(item._id);
+    setHeading(item.heading);
+    setSubtitle(item.subtitle);
+    setSlug(item.slug);
+    setCategory(item.category);
+  };
+
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("heading", heading);
+      formData.append("subtitle", subtitle);
+      formData.append("slug", slug);
+      formData.append("category", category);
+
+      if (image) {
+          
+      } 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //  +++++++++++++++++++++++++++++++ Edit ++++++++++++++++++++++++++++++++++++++++++
 
   useEffect(() => {
     document.title = "Add Slider || Dashboard";
@@ -98,7 +126,6 @@ const Slider = () => {
     <div>
       <div>
         <BreadCrumb title="Slider" />
-
         <div className="text-end"></div>
       </div>
       <div className="mt-4  md:py-4   px-2 border border-slate-800  text-white">
@@ -107,7 +134,11 @@ const Slider = () => {
             Add
           </h2>
         </div>
-        <form ref={formRef} onSubmit={handleMenu} className="md:px-8">
+        <form
+          ref={formRef}
+          onSubmit={isEditing ? handleUpdate : handleMenu}
+          className="md:px-8"
+        >
           <div className="grid md:grid-cols-2 gap-4 md:gap-x-6 md:gap-y-4 ">
             <div>
               <label htmlFor="image">Image</label> <br />
@@ -116,7 +147,7 @@ const Slider = () => {
                 name="image"
                 id="image"
                 accept="image/png, image/jpeg, image/jpg, image/webp"
-                required
+                required={!isEditing}
                 onChange={(e) => setImage(e.target?.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
               />
@@ -139,7 +170,7 @@ const Slider = () => {
               <input
                 type="text"
                 name="subtitle"
-                // value={subtitle}
+                value={subtitle}
                 id="subtitle"
                 onChange={(e) => setSubtitle(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -166,6 +197,7 @@ const Slider = () => {
               <input
                 type="text"
                 name="categories"
+                value={category}
                 id="categories"
                 onChange={(e) => setCategory(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -175,7 +207,7 @@ const Slider = () => {
           </div>
           <div>
             <button className="bg-indigo-500 mt-5 py-2 cursor-pointer rounded-sm w-full">
-              Add
+              {isEditing ? "Update" : "Add"}
             </button>
           </div>
         </form>
@@ -210,7 +242,10 @@ const Slider = () => {
                         }}
                         className="text-2xl cursor-pointer text-red-600"
                       />
-                      <MdEdit className="text-2xl cursor-pointer text-sky-600" />
+                      <MdEdit
+                        onClick={() => handleEdit(items)}
+                        className="text-2xl cursor-pointer text-sky-600"
+                      />
                     </div>
                   </div>
                 </div>
