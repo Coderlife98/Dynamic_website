@@ -14,6 +14,7 @@ const Slider = () => {
   const [slug, setSlug] = useState("");
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState("");
+  const [status, setStatus] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const formRef = useRef();
@@ -94,6 +95,7 @@ const Slider = () => {
     setSubtitle(item.subtitle);
     setSlug(item.slug);
     setCategory(item.category);
+    setStatus(item.isActive);
   };
 
   const handleUpdate = async (event) => {
@@ -104,12 +106,35 @@ const Slider = () => {
       formData.append("subtitle", subtitle);
       formData.append("slug", slug);
       formData.append("category", category);
+      formData.append("isActive", status);
 
       if (image) {
-          
-      } 
+        formData.append("image", image);
+      }
+
+      const updateData = await axios.put(
+        `${Base_url}slider/Slider/update/${editId}`,
+        formData,
+      );
+
+      if (updateData) {
+        toast.success(updateData.data.message);
+        setHeading("");
+        setSubtitle("");
+        setSlug("");
+        setCategory("");
+        setImage(null);
+        setStatus("");
+        setIsEditing(false);
+        setEditId(null);
+
+        formRef.current.reset();
+
+        getSlider();
+      }
     } catch (error) {
       console.log(error);
+      toast.error(error.response?.data?.message || "Something went wrong");
     }
   };
   //  +++++++++++++++++++++++++++++++ Edit ++++++++++++++++++++++++++++++++++++++++++
@@ -203,6 +228,20 @@ const Slider = () => {
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
                 placeholder="Enter Categories"
               />
+            </div>
+            <div>
+              <label htmlFor="isActive">Status</label> <br />
+              <select
+                name="isActive"
+                value={status}
+                className="w-full border border-slate-600 p-2"
+                onChange={(e) => setStatus(e.target?.value)}
+                id="isActive"
+              >
+                <option value="">-- Select --</option>
+                <option value="true">Active</option>
+                <option value="false">InActive</option>
+              </select>
             </div>
           </div>
           <div>
