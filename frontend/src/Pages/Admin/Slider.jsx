@@ -80,6 +80,14 @@ const Slider = () => {
       if (deleteData) {
         toast.success(deleteData.data.message);
         getSlider();
+        setHeading("");
+        setSubtitle("");
+        setSlug("");
+        setCategory("");
+        setImage(null);
+        setStatus("");
+        setIsEditing(false);
+        setEditId(null);
       }
     } catch (error) {
       console.log(error);
@@ -94,7 +102,7 @@ const Slider = () => {
     setHeading(item.heading);
     setSubtitle(item.subtitle);
     setSlug(item.slug);
-    setCategory(item.category);
+    setCategory(item.categories);
     setStatus(item.isActive);
   };
 
@@ -105,7 +113,7 @@ const Slider = () => {
       formData.append("heading", heading);
       formData.append("subtitle", subtitle);
       formData.append("slug", slug);
-      formData.append("category", category);
+      formData.append("categories", category);
       formData.append("isActive", status);
 
       if (image) {
