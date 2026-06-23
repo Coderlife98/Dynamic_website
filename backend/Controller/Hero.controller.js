@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Hero } from "../models/Hero.model.js";
 
 export const AddHero = async (req, res) => {
@@ -66,6 +67,12 @@ export const getHero = async (req, res) => {
 export const getHeroById = async (req, res) => {
   try {
     const id = req.params.id;
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({
+        message: "Invalid Id",
+        success: false,
+      });
+    }
     const getData = await Hero.findById(id);
     if (getData) {
       return res.status(200).json({
@@ -73,10 +80,49 @@ export const getHeroById = async (req, res) => {
         success: true,
         data: getData,
       });
+    } else {
+      return res.status(404).json({
+        message: "Data not Exist On DB",
+        success: false,
+      });
     }
   } catch (error) {
     return res.status(404).json({
       message: "Error Occur While get Data By ID",
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+export const deleteById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({
+        message: "Invalid Id",
+        success: false,
+      });
+    }
+
+    const getData = await Hero.findById(id);
+    if (getData) {
+      const deleteById = await Hero.findByIdAndDelete(id);
+      if (deleteById) {
+        return res.status(200).json({
+          message: "Data Deleted Successfully",
+          success: true,
+        });
+      }
+    } else {
+      return res.status(404).json({
+        message: "Data not Exist on DB",
+        success: false,
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error Occur While Deleting Data By ID",
       success: false,
       error: error.message,
     });
