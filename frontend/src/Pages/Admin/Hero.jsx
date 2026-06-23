@@ -5,7 +5,7 @@ import axios from "axios";
 import { Base_url } from "../../constant/constant";
 import { MdEdit } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
-
+import toast from "react-hot-toast";
 const Hero = () => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
@@ -48,6 +48,21 @@ const Hero = () => {
   };
 
   // ++++++++++++++++++++++++++++++++++ Get Hero Data end ++++++++++++++++++++++++++++++++++
+
+  // ++++++++++++++++++++++++++++++++++ Handle Edit Data start ++++++++++++++++++++++++++++++++++
+  const handleEdit = async (event) => {
+    try {
+    } catch (error) {}
+  };
+  // ++++++++++++++++++++++++++++++++++ Handle Edit Data end ++++++++++++++++++++++++++++++++++
+
+  // ++++++++++++++++++++++++++++++++++ Handle Delete Data start ++++++++++++++++++++++++++++++++++
+  const handleDelete = async (event) => {
+    try {
+    } catch (error) {}
+  };
+  // ++++++++++++++++++++++++++++++++++ Handle Delete Data end ++++++++++++++++++++++++++++++++++
+
   useEffect(() => {
     document.title = "Add Hero || Dashboard";
   });
@@ -130,8 +145,18 @@ const Hero = () => {
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <AiFillDelete className="text-2xl cursor-pointer text-red-600" />
-                      <MdEdit className="text-2xl cursor-pointer text-sky-600" />
+                      <AiFillDelete
+                        onClick={() => {
+                          handleDelete(items);
+                        }}
+                        className="text-2xl cursor-pointer text-red-600"
+                      />
+                      <MdEdit
+                        onClick={() => {
+                          handleEdit(items);
+                        }}
+                        className="text-2xl cursor-pointer text-sky-600"
+                      />
                     </div>
                   </div>
                 </div>
