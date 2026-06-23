@@ -62,3 +62,23 @@ export const getHero = async (req, res) => {
     });
   }
 };
+
+export const getHeroById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const getData = await Hero.findById(id);
+    if (getData) {
+      return res.status(200).json({
+        message: "Get Data",
+        success: true,
+        data: getData,
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error Occur While get Data By ID",
+      success: false,
+      error: error.message,
+    });
+  }
+};

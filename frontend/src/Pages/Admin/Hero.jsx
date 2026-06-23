@@ -3,11 +3,14 @@ import BreadCrumb from "../../component/Admin/BreadCrumb";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Base_url } from "../../constant/constant";
+import { MdEdit } from "react-icons/md";
+import { AiFillDelete } from "react-icons/ai";
 
 const Hero = () => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState("");
+  const [heroData, setHeroData] = useState([]);
   const formRef = useRef();
   const { id } = useParams();
   const handleHero = async (event) => {
@@ -29,9 +32,30 @@ const Hero = () => {
       console.log(error);
     }
   };
+
+  // ++++++++++++++++++++++++++++++++++ Get Hero Data start ++++++++++++++++++++++++++++++++++
+
+  const getHero = async () => {
+    try {
+      const getData = await axios.get(`${Base_url}hero/get/${id}`);
+      if (getData) {
+        setHeroData(getData.data.data);
+        toast.success(getData.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message || "Something Went Wrong");
+    }
+  };
+
+  // ++++++++++++++++++++++++++++++++++ Get Hero Data end ++++++++++++++++++++++++++++++++++
   useEffect(() => {
     document.title = "Add Hero || Dashboard";
   });
+
+  useEffect(() => {
+    getHero();
+  }, []);
+
   return (
     <div>
       <BreadCrumb title="Hero" />
@@ -86,6 +110,34 @@ const Hero = () => {
             </button>
           </div>
         </form>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-5">
+        {heroData &&
+          heroData.length > 0 &&
+          heroData.map((items, index) => (
+            <div className="mt-4 border p-2 border-slate-800" key={index}>
+              <div>
+                <img
+                  src={`${Base_url.replace("/api/", "/")}${items.image}`}
+                  className="w-full h-52"
+                  alt=""
+                />
+                <div className="my-2">
+                  <h5 className="text-slate-300 my-2 text-lg">{items.title}</h5>
+                  <p className="text-slate-300 my-2 text-sm">
+                    {items.category}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <AiFillDelete className="text-2xl cursor-pointer text-red-600" />
+                      <MdEdit className="text-2xl cursor-pointer text-sky-600" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );
