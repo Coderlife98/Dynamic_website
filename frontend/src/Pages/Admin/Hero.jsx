@@ -10,7 +10,11 @@ const Hero = () => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState("");
+  const [menuId, setMenuId] = useState("");
+  const [status, setStatus] = useState("");
   const [heroData, setHeroData] = useState([]);
+  const [editId, setEditId] = useState(null);
+  const [edit, setEdit] = useState(false);
   const formRef = useRef();
   const { id } = useParams();
   const handleHero = async (event) => {
@@ -20,6 +24,7 @@ const Hero = () => {
       formData.append("image", image);
       formData.append("title", title);
       formData.append("category", category);
+      formData.append("isActive", status);
       formData.append("menuId", id);
       const response = await axios.post(`${Base_url}hero/Hero/add`, formData);
       if (response) {
@@ -28,6 +33,8 @@ const Hero = () => {
         setTitle("");
         setImage(null);
         setCategory("");
+        setStatus("");
+        setEdit(false)
         formRef.current.reset();
       }
     } catch (error) {
@@ -52,10 +59,49 @@ const Hero = () => {
   // ++++++++++++++++++++++++++++++++++ Get Hero Data end ++++++++++++++++++++++++++++++++++
 
   // ++++++++++++++++++++++++++++++++++ Handle Edit Data start ++++++++++++++++++++++++++++++++++
-  const handleEdit = async (event) => {
+  const handleEdit = async (items) => {
     try {
-    } catch (error) { }
+      setEdit(true);
+      setEditId(items._id);
+      setTitle(items.title);
+      setStatus(items.isActive);
+      setCategory(items.categories);
+
+    } catch (error) {
+      toast.error(error.response.data.message || "Something Went Wrong");
+    }
   };
+
+
+  const handleUpdate = async (event) => {
+    try {
+      event.preventDefault();
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("category", category);
+      formData.append("isActive", status);
+
+      if (image) {
+        formData.append("image", image);
+      }
+
+      const updateData = await axios.patch(`${Base_url}hero/Hero/update_hero/${editId}`, formData);
+      if (updateData) {
+        toast.success(updateData.data.message);
+        setTitle("");
+        setImage(null);
+        setCategory("");
+        setStatus("");
+        setEdit(false);
+        getHero();
+        formRef.current.reset();
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error || "Something Went Wrong");
+    }
+  }
   // ++++++++++++++++++++++++++++++++++ Handle Edit Data end ++++++++++++++++++++++++++++++++++
 
   // ++++++++++++++++++++++++++++++++++ Handle Delete Data start ++++++++++++++++++++++++++++++++++
@@ -72,8 +118,10 @@ const Hero = () => {
         toast.success(deleteData.data.message);
         getHero();
       }
-
-    } catch (error) { }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message || "Something Went Wrong");
+    }
   };
   // ++++++++++++++++++++++++++++++++++ Handle Delete Data end ++++++++++++++++++++++++++++++++++
 
@@ -94,7 +142,7 @@ const Hero = () => {
             Add
           </h2>
         </div>
-        <form ref={formRef} onSubmit={handleHero} className="md:px-8">
+        <form ref={formRef} onSubmit={edit ? handleUpdate : handleHero} className="md:px-8">
           <div className="grid md:grid-cols-2 gap-4 md:gap-x-6 md:gap-y-4 ">
             <div>
               <label htmlFor="image">Image</label> <br />
@@ -103,11 +151,11 @@ const Hero = () => {
                 name="image"
                 id="image"
                 accept="image/png, image/jpeg, image/jpg, image/webp"
-                required
+                required={!edit}
                 onChange={(e) => setImage(e.target?.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
               />
-              <input type="hidden" name="parentId" />
+              <input type="hidden" name="menuId" />
             </div>
             <div>
               <label htmlFor="title">Title</label> <br />
@@ -115,6 +163,7 @@ const Hero = () => {
                 type="text"
                 name="title"
                 id="title"
+                value={title}
                 required
                 onChange={(e) => setTitle(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -125,17 +174,32 @@ const Hero = () => {
               <label htmlFor="category">Category</label> <br />
               <input
                 type="text"
-                name="category"
-                id="category"
+                name="categories"
+                value={category}
+                id="categories"
                 onChange={(e) => setCategory(e.target.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
                 placeholder="Enter Category"
               />
             </div>
+            <div>
+              <label htmlFor="isActive">Status</label> <br />
+              <select
+                name="isActive"
+                value={status}
+                className="w-full border bg-black text-white border-slate-600 p-2"
+                onChange={(e) => setStatus(e.target?.value)}
+                id="isActive"
+              >
+                <option value="">-- Select --</option>
+                <option value="true">Active</option>
+                <option value="false">InActive</option>
+              </select>
+            </div>
           </div>
           <div>
             <button className="bg-indigo-500 mt-5 py-2 cursor-pointer rounded-sm w-full">
-              Add
+              {edit ? "Update" : " Add"}
             </button>
           </div>
         </form>

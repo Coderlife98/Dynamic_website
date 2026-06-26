@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { Hero } from "../models/Hero.model.js";
-
+import fs from "fs";
 export const AddHero = async (req, res) => {
   try {
     const { title, category, menuId, isActive } = req.body;
@@ -128,3 +128,56 @@ export const deleteById = async (req, res) => {
     });
   }
 };
+
+
+export const updateById = async (req, res) => {
+  try {
+    const { title, isActive, category, menuId } = req.body;
+    const id = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({
+        message: "Invalid Id",
+        success: false
+      })
+    }
+
+    const isDataExist = await Hero.findById(id);
+
+
+    if (!isDataExist) {
+      return res.status(404).json({
+        message: "Data not Exist On DB",
+        success: false
+      })
+    }
+
+
+    if (req.file) {
+      if (isDataExist.image && fs.existsSync(isDataExist.image)) {
+        fs.unlinkSync(isDataExist?.image);
+      }
+
+      isDataExist.image = req.file.path;
+    }
+
+    isDataExist.title = title || isDataExist.title;
+    isDataExist.isActive = isActive || isDataExist.isActive;
+    isDataExist.menuId = menuId || isDataExist.menuId;
+
+    await isDataExist.save();
+
+    return res.status(200).json({
+      message: "Data Updated Successfully",
+      success: true,
+      data: isDataExist
+    })
+
+
+  } catch (error) {
+    return res.status(404).json({
+      message: "Error Occur While Updating Data By ID",
+      success: false,
+      error: error.message,
+    });
+  }
+}
