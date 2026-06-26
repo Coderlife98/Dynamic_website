@@ -1,5 +1,43 @@
 import mongoose from "mongoose";
 
+
+
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++ Get All Data start +++++++++++++++++++++++++++ //
+export const getAll = (Model, modelName = "Data") => {
+  return async (req, res) => {
+    try {
+      const data = await Model.find();
+
+      if (!data || data.length === 0) {
+        return res.status(404).json({
+          message: `No ${modelName} found`,
+          success: false,
+        });
+      }
+
+      return res.status(200).json({
+        message: `${modelName} fetched successfully`,
+        success: true,
+        count: data.length,
+        data,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: `Error while fetching ${modelName}`,
+        success: false,
+        error: error.message,
+      });
+    }
+  };
+};
+// +++++++++++++++++++++++++++++++++++++++++++++++++++ Get All Data end +++++++++++++++++++++++++++ //
+
+
+
+
+
 export const getById = (Model, modelName = "Data") => {
   return async (req, res) => {
     try {
@@ -36,37 +74,6 @@ export const getById = (Model, modelName = "Data") => {
   };
 };
 
-
-
-// +++++++++++++++++++++++++++++++++++++++++++++++++++ Get All Data start +++++++++++++++++++++++++++ //
-export const getAll = (Model, modelName = "Data") => {
-  return async (req, res) => {
-    try {
-      const data = await Model.find();
-
-      if (!data || data.length === 0) {
-        return res.status(404).json({
-          message: `No ${modelName} found`,
-          success: false,
-        });
-      }
-
-      return res.status(200).json({
-        message: `${modelName} fetched successfully`,
-        success: true,
-        count: data.length,
-        data,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        message: `Error while fetching ${modelName}`,
-        success: false,
-        error: error.message,
-      });
-    }
-  };
-};
-// +++++++++++++++++++++++++++++++++++++++++++++++++++ Get All Data end +++++++++++++++++++++++++++ //
 
 
 

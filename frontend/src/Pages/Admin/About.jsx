@@ -1,16 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import BreadCrumb from "../../component/Admin/BreadCrumb";
 import axios from "axios";
-import { Base_url } from "../../constant/constant";
+import { Base_url, Base_url_img } from "../../constant/constant";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 const About = () => {
   const [heading, setHeading] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
+  const [menuId, setMenuId] = useState("");
   const [image_1, setImage_1] = useState(null);
   const [image_2, setImage_2] = useState(null);
   const [hasAboutData, setHasAboutData] = useState(false);
+  const [getData, setGetData] = useState([]);
   const formRef = useRef();
   const { id } = useParams();
 
@@ -26,7 +28,7 @@ const About = () => {
       formData.append("image_2", image_2);
 
       const operation = await axios.post(
-        `${Base_url}about/About/add`,
+        `${Base_url}about/About/add/${id}`,
         formData,
       );
       if (operation) {
@@ -42,19 +44,47 @@ const About = () => {
       console.log(error);
     }
   };
+
+
+
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("heading", heading);
+      formData.append("description", description);
+      formData.append("isActive", status);
+      if (image_1) {
+        formData.append("image_1", image_1);
+      }
+
+      if (image_2) {
+        formData.append("image_2", image_2);
+      }
+      formData.append("menuId", id);
+      const updateData = await axios.post(`${Base_url}about/About/add/${id}`, formData);
+      if (updateData) {
+        toast.success(updateData.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message || "Something Went Wrong");
+    }
+  }
+
   useEffect(() => {
     const getAbout = async () => {
       try {
-        const res = await axios.get(`${Base_url}about/get`);
-
-        if (res.data && res.data.data) {
+        const res = await axios.get(`${Base_url}about/getById/${id}`);
+        if (res.data && res.data.data.length > 0) {
+          setGetData(res.data.data);
+          // console.log(getData[0].image_1)
           setHasAboutData(true);
-          setHeading("");
-          setDescription("");
+          setHeading(res.data.data[0].heading || "");
+          setDescription(res.data.data[0].description || "");
           setImage_1(null);
           setImage_2(null);
-          setStatus("");
-          formRef.current.reset();
+          setStatus(res.data.data[0].isActive || "");
         }
       } catch (error) {
         console.log(error);
@@ -73,10 +103,9 @@ const About = () => {
             Add
           </h2>
         </div>
-        <form ref={formRef} onSubmit={handleAbout} className="md:px-8">
+        <form ref={formRef} onSubmit={getData ? handleUpdate : handleAbout} className="md:px-8">
           <div className="grid md:grid-cols-2 gap-4 md:gap-x-6 md:gap-y-4 ">
             <input type="hidden" name="menuId" />
-
             <div>
               <label htmlFor="image_1">Image 1</label> <br />
               <input
@@ -88,6 +117,13 @@ const About = () => {
                 onChange={(e) => setImage_1(e.target?.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
               />
+              {
+                getData.length > 0 && (
+                  <a href={`${Base_url_img}${getData[0].image_1}`} className="mt-4 inline-block" target="_blank">
+                    <img src={`${Base_url_img}${getData[0].image_1}`} width="50" alt="" />
+                  </a>
+                )
+              }
             </div>
             <div>
               <label htmlFor="image_2">Image 2</label> <br />
@@ -99,12 +135,20 @@ const About = () => {
                 onChange={(e) => setImage_2(e.target?.files[0])}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
               />
+              {
+                getData.length > 0 && (
+                  <a href={`${Base_url_img}${getData[0].image_2}`} className="mt-4 inline-block" target="_blank">
+                    <img src={`${Base_url_img}${getData[0].image_2}`} width="50" alt="" />
+                  </a>
+                )
+              }
             </div>
             <div>
               <label htmlFor="heading">Heading</label> <br />
               <input
                 type="text"
                 name="heading"
+                value={heading}
                 id="heading"
                 onChange={(e) => setHeading(e.target?.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
@@ -117,6 +161,7 @@ const About = () => {
                 type="text"
                 name="description"
                 id="description"
+                value={description}
                 onChange={(e) => setDescription(e.target?.value)}
                 className="border border-slate-500 mt-1 focus:outline-none w-full px-2 py-1"
                 placeholder="Enter Description"
@@ -127,7 +172,7 @@ const About = () => {
               <select
                 name="isActive"
                 value={status}
-                className="w-full border border-slate-600 p-2"
+                className="w-full border bg-black text-white border-slate-600 p-2"
                 onChange={(e) => setStatus(e.target?.value)}
                 id="isActive"
               >
@@ -139,7 +184,7 @@ const About = () => {
           </div>
           <div>
             <button className="bg-indigo-500 mt-5 py-2 cursor-pointer rounded-sm w-full">
-              Add
+              {getData ? "Update" : "Add"}
             </button>
           </div>
         </form>
