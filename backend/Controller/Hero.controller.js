@@ -67,13 +67,13 @@ export const getHero = async (req, res) => {
 export const getHeroById = async (req, res) => {
   try {
     const id = req.params.id;
-    if (mongoose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({
         message: "Invalid Id",
         success: false,
       });
     }
-    const getData = await Hero.findById(id);
+    const getData = await Hero.find({ menuId: id });
     if (getData) {
       return res.status(200).json({
         message: "Get Data",
@@ -98,7 +98,7 @@ export const getHeroById = async (req, res) => {
 export const deleteById = async (req, res) => {
   try {
     const id = req.params.id;
-    if (mongoose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({
         message: "Invalid Id",
         success: false,

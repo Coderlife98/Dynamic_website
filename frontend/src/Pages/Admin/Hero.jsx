@@ -23,6 +23,8 @@ const Hero = () => {
       formData.append("menuId", id);
       const response = await axios.post(`${Base_url}hero/Hero/add`, formData);
       if (response) {
+        toast.success(response.data.message);
+        getHero();
         setTitle("");
         setImage(null);
         setCategory("");
@@ -37,12 +39,12 @@ const Hero = () => {
 
   const getHero = async () => {
     try {
-      const getData = await axios.get(`${Base_url}hero/get/${id}`);
+      const getData = await axios.get(`${Base_url}hero/getById/${id}`);
       if (getData) {
         setHeroData(getData.data.data);
-        toast.success(getData.data.message);
       }
     } catch (error) {
+      console.log(error);
       toast.error(error.response.data.message || "Something Went Wrong");
     }
   };
@@ -52,14 +54,26 @@ const Hero = () => {
   // ++++++++++++++++++++++++++++++++++ Handle Edit Data start ++++++++++++++++++++++++++++++++++
   const handleEdit = async (event) => {
     try {
-    } catch (error) {}
+    } catch (error) { }
   };
   // ++++++++++++++++++++++++++++++++++ Handle Edit Data end ++++++++++++++++++++++++++++++++++
 
   // ++++++++++++++++++++++++++++++++++ Handle Delete Data start ++++++++++++++++++++++++++++++++++
-  const handleDelete = async (event) => {
+  const handleDelete = async (items) => {
     try {
-    } catch (error) {}
+      console.log(items._id);
+      let confirmMessage = window.confirm("Are You Sure !!");
+      if (!confirmMessage) {
+        return false;
+      }
+
+      const deleteData = await axios.delete(`${Base_url}hero/deleteById/${items._id}`);
+      if (deleteData) {
+        toast.success(deleteData.data.message);
+        getHero();
+      }
+
+    } catch (error) { }
   };
   // ++++++++++++++++++++++++++++++++++ Handle Delete Data end ++++++++++++++++++++++++++++++++++
 
